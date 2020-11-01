@@ -3,19 +3,11 @@ exports.createPages = async ({ graphql, actions }) => {
   const result = await graphql(
     `
       {
-        articles: allStrapiArticle {
+        horses: allStrapiHorse{
           edges {
             node {
               strapiId
-              slug
-            }
-          }
-        }
-        categories: allStrapiCategory {
-          edges {
-            node {
-              strapiId
-              slug
+              slug: name
             }
           }
         }
@@ -27,30 +19,16 @@ exports.createPages = async ({ graphql, actions }) => {
     throw result.errors;
   }
 
-  // Create blog articles pages.
-  const articles = result.data.articles.edges;
-  const categories = result.data.categories.edges;
+  // Create horses pages.
+  const horses = result.data.horses.edges;
+  const HorseTemplate = require.resolve("./src/templates/horse.js");
 
-  const ArticleTemplate = require.resolve("./src/templates/article.js");
-
-  articles.forEach((article, index) => {
+  horses.forEach((horse) => {
     createPage({
-      path: `/article/${article.node.slug}`,
-      component: ArticleTemplate,
+      path: `/horse/${horse.node.slug}`,
+      component: HorseTemplate,
       context: {
-        slug: article.node.slug,
-      },
-    });
-  });
-
-  const CategoryTemplate = require.resolve("./src/templates/category.js");
-
-  categories.forEach((category, index) => {
-    createPage({
-      path: `/category/${category.node.slug}`,
-      component: CategoryTemplate,
-      context: {
-        slug: category.node.slug,
+        slug: horse.node.slug,
       },
     });
   });
@@ -59,14 +37,14 @@ exports.createPages = async ({ graphql, actions }) => {
 module.exports.onCreateNode = async ({ node, actions, createNodeId }) => {
   const crypto = require(`crypto`);
 
-  if (node.internal.type === "StrapiArticle") {
+  if (node.internal.type === "StrapiHorse") {
     const newNode = {
-      id: createNodeId(`StrapiArticleContent-${node.id}`),
+      id: createNodeId(`StrapiHorseContent-${node.id}`),
       parent: node.id,
       children: [],
       internal: {
         content: node.content || " ",
-        type: "StrapiArticleContent",
+        type: "StrapiHorseContent",
         mediaType: "text/markdown",
         contentDigest: crypto
           .createHash("md5")
