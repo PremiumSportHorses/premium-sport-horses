@@ -25,10 +25,22 @@ exports.createPages = async ({ graphql, actions }) => {
 
   horses.forEach((horse) => {
     createPage({
-      path: `/horse/${horse.node.slug}`,
+      path: `pl/horse/${horse.node.slug}`,
       component: HorseTemplate,
       context: {
         slug: horse.node.slug,
+        lang: 'PL'
+      },
+    });
+  });
+
+  horses.forEach((horse) => {
+    createPage({
+      path: `horse/${horse.node.slug}`,
+      component: HorseTemplate,
+      context: {
+        slug: horse.node.slug,
+        lang: 'Eng'
       },
     });
   });

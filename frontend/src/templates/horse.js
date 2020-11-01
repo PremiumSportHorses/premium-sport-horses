@@ -8,7 +8,8 @@ export const query = graphql`
   query HorseQuery($slug: String!) {
     strapiHorse(name: { eq: $slug }) {
       name
-      description
+      description_langPL
+      description_langEng
       image: mainImage {
         publicURL
         childImageSharp {
@@ -21,7 +22,8 @@ export const query = graphql`
   }
 `;
 
-const Horse = ({ data }) => {
+const Horse = ({ data, pageContext}) => {
+  const { lang }  = pageContext;
   const horse = data.strapiHorse;
 
   return (
@@ -30,7 +32,7 @@ const Horse = ({ data }) => {
 
         <div className="uk-section">
           <div className="uk-container uk-container-small">
-            <Markdown source={horse.description} escapeHtml={false} />
+            <Markdown source={horse[`description_lang${lang}`]} escapeHtml={false} />
             <hr className="uk-divider-small" />
             <Img
               fixed={horse.image.childImageSharp.fixed}
