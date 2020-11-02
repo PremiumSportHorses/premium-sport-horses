@@ -1,16 +1,18 @@
-import React from "react";
-import { graphql, useStaticQuery } from "gatsby";
-import "../assets/css/main.css";
+import React from 'react';
+import { graphql, useStaticQuery } from 'gatsby';
+import Layout from '../components/layout';
+import '../assets/css/main.css';
 
-const About = (props) => {
-  const data= useStaticQuery(query).strapiAboutUs;
-  const lang = props.lang || 'Eng'
+const AboutPage = (props) => {
+  const data = useStaticQuery(query).strapiAboutUs;
+  const lang = props.lang || 'Eng';
+  const { path } = props;
 
   return (
-    <div>
+    <Layout lang={lang} path={path}>
       <p>About us</p>
       <h1>{data[`Description_lang${lang}`]}</h1>
-    </div>
+    </Layout>
   );
 };
 
@@ -23,4 +25,4 @@ const query = graphql`
   }
 `;
 
-export default About;
+export default AboutPage;

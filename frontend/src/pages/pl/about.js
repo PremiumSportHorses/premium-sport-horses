@@ -1,12 +1,8 @@
-import React from "react";
-import About from "../about"
+import React from 'react';
+import AboutPage from '../about';
 
-
-const AboutPL = () => {
-
-  return (
-    <About lang={'PL'}/>
-  );
+const AboutPagePL = (props) => {
+  return <AboutPage lang={'PL'} {...props} />;
 };
 
-export default AboutPL;
+export default AboutPagePL;
