@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { StaticQuery, graphql } from 'gatsby';
+// import { StaticQuery, graphql } from 'gatsby';
 import Nav from './nav';
+import Seo from '../components/seo';
 // import Seo from "./seo";
 
 // const Layout = ({ children, seo }) => (
@@ -31,6 +32,7 @@ import Nav from './nav';
 
 const Layout = ({ children, lang, path }) => (
   <>
+    <Seo />
     <Nav lang={lang} path={path} />
     <main>{children}</main>
   </>

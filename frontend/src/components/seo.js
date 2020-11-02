@@ -1,11 +1,11 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Helmet } from "react-helmet";
-import { useStaticQuery, graphql } from "gatsby";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Helmet } from 'react-helmet';
+import { useStaticQuery, graphql } from 'gatsby';
 
 const SEO = ({ seo = {} }) => {
-  const { strapiGlobal } = useStaticQuery(query);
-  const { defaultSeo, siteName, favicon } = strapiGlobal;
+  const { strapiGlobalSettings } = useStaticQuery(query);
+  const { defaultSeo, siteName, favicon } = strapiGlobalSettings;
 
   // Merge default and page-specific SEO values
   const fullSeo = { ...defaultSeo, ...seo };
@@ -16,11 +16,11 @@ const SEO = ({ seo = {} }) => {
     if (fullSeo.metaTitle) {
       tags.push(
         {
-          property: "og:title",
+          property: 'og:title',
           content: fullSeo.metaTitle,
         },
         {
-          name: "twitter:title",
+          name: 'twitter:title',
           content: fullSeo.metaTitle,
         }
       );
@@ -28,45 +28,43 @@ const SEO = ({ seo = {} }) => {
     if (fullSeo.metaDescription) {
       tags.push(
         {
-          name: "description",
+          name: 'description',
           content: fullSeo.metaDescription,
         },
         {
-          property: "og:description",
+          property: 'og:description',
           content: fullSeo.metaDescription,
         },
         {
-          name: "twitter:description",
+          name: 'twitter:description',
           content: fullSeo.metaDescription,
         }
       );
     }
     if (fullSeo.shareImage) {
-      const imageUrl =
-        (process.env.GATSBY_ROOT_URL || "http://localhost:8000") +
-        fullSeo.shareImage.publicURL;
+      const imageUrl = (process.env.GATSBY_ROOT_URL || 'http://localhost:8000') + fullSeo.shareImage.publicURL;
       tags.push(
         {
-          name: "image",
+          name: 'image',
           content: imageUrl,
         },
         {
-          property: "og:image",
+          property: 'og:image',
           content: imageUrl,
         },
         {
-          name: "twitter:image",
+          name: 'twitter:image',
           content: imageUrl,
         }
       );
     }
     if (fullSeo.article) {
       tags.push({
-        property: "og:type",
-        content: "article",
+        property: 'og:type',
+        content: 'article',
       });
     }
-    tags.push({ name: "twitter:card", content: "summary_large_image" });
+    tags.push({ name: 'twitter:card', content: 'summary_large_image' });
 
     return tags;
   };
@@ -79,30 +77,27 @@ const SEO = ({ seo = {} }) => {
       titleTemplate={`%s | ${siteName}`}
       link={[
         {
-          rel: "icon",
+          rel: 'icon',
           href: favicon.publicURL,
         },
         {
-          rel: "stylesheet",
-          href: "https://fonts.googleapis.com/css?family=Staatliches",
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/css?family=Staatliches',
         },
         {
-          rel: "stylesheet",
-          href:
-            "https://cdn.jsdelivr.net/npm/uikit@3.2.3/dist/css/uikit.min.css",
+          rel: 'stylesheet',
+          href: 'https://cdn.jsdelivr.net/npm/uikit@3.2.3/dist/css/uikit.min.css',
         },
       ]}
       script={[
         {
-          src:
-            "https://cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/js/uikit.min.js",
+          src: 'https://cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/js/uikit.min.js',
         },
         {
-          src:
-            "https://cdn.jsdelivr.net/npm/uikit@3.2.3/dist/js/uikit-icons.min.js",
+          src: 'https://cdn.jsdelivr.net/npm/uikit@3.2.3/dist/js/uikit-icons.min.js',
         },
         {
-          src: "https://cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/js/uikit.js",
+          src: 'https://cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/js/uikit.js',
         },
       ]}
       meta={metaTags}
@@ -128,7 +123,7 @@ SEO.defaultProps = {
 
 const query = graphql`
   query {
-    strapiGlobal {
+    strapiGlobalSettings {
       siteName
       favicon {
         publicURL
