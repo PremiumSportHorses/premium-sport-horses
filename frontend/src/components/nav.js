@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'gatsby';
+import { getLangPath } from '../utils/lang';
 
 // const Nav = () => (
 //   <StaticQuery
@@ -54,20 +55,6 @@ import { Link } from 'gatsby';
 //     )}
 //   />
 // );
-
-const PlPrefix = 'pl/';
-
-const getLangPath = (path, lang) => {
-  if (lang === 'PL' && path.indexOf(PlPrefix) < 0) {
-    return `${PlPrefix}${path}`;
-  }
-
-  if (lang === 'Eng' && path.indexOf(PlPrefix) >= 0) {
-    return path.replace(PlPrefix, '');
-  }
-
-  return path;
-};
 
 const Nav = ({ lang, path }) => {
   return (

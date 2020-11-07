@@ -13,8 +13,8 @@ export const query = graphql`
       image: mainImage {
         publicURL
         childImageSharp {
-          fixed {
-            src
+          fixed(width: 300) {
+            ...GatsbyImageSharpFixed_noBase64
           }
         }
       }
