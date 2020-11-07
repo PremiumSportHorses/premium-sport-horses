@@ -1,0 +1,9 @@
+.mainHeader {
+  .links {
+    display: none;
+
+    &.isOpen {
+      display: block;
+    }
+  }
+}

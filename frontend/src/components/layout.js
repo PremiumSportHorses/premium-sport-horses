@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Nav from './nav';
 import Seo from './seo';
 // import Seo from "./seo";
+import '../assets/css/normalize.css';
 
 // const Layout = ({ children, seo }) => (
 //   <StaticQuery

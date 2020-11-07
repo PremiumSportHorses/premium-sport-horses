@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'gatsby';
 import { getLangPath } from '../utils/lang';
+import { useStaticQuery, graphql } from 'gatsby';
+import Img from 'gatsby-image';
+
+import './nav.scss';
+import FacebookIcon from './icons/facebook-icon';
 
 // const Nav = () => (
 //   <StaticQuery
@@ -57,36 +62,101 @@ import { getLangPath } from '../utils/lang';
 // );
 
 const Nav = ({ lang, path }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const { strapiGlobalSettings } = useStaticQuery(query);
+
   return (
-    <div>
-      <nav className="uk-navbar-container" data-uk-navbar>
-        <div className="uk-navbar-left">
-          <ul className="uk-navbar-nav">
+    <header className="mainHeader">
+      <div className="logo">
+        <Link to="/">
+          {' '}
+          <Img
+            fixed={strapiGlobalSettings.Logo.childImageSharp.fixed}
+            imgStyle={{ position: 'static' }}
+            alt="Premium Sport Horses Logo"
+          />
+        </Link>
+      </div>
+      <nav className="mainNav">
+        <button
+          className="navbarToggler"
+          type="button"
+          aria-controls="menu"
+          aria-expanded={isOpen}
+          aria-label="Toggle navigation"
+          onClick={() => {
+            setIsOpen(!isOpen);
+          }}
+        >
+          <span className="navbar-toggler-icon">Menu</span>
+        </button>
+        <div className={`links${isOpen ? ' isOpen' : ''}`} id="menu">
+          <ul className="links-list">
             <li>
-              <Link to="/">Site Name</Link>
+              <Link to={getLangPath(`/about`, lang)}>{lang === 'PL' ? 'O nas' : 'About us'}</Link>
+            </li>
+            <li>
+              <Link to={getLangPath(`/partners`, lang)}>{lang === 'PL' ? 'Nasi Partnerzy' : 'Our Partners'}</Link>
+            </li>
+            <li>
+              <Link to={getLangPath(`/horses`, lang)}>{lang === 'PL' ? 'Sprzedaz Koni' : 'Horses for Sale'}</Link>
+            </li>
+            <li>
+              <Link to={getLangPath(`/trainings`, lang)}>{lang === 'PL' ? 'Treningi Sportowe' : 'Trainings'}</Link>
+            </li>
+            <li>
+              <Link to={getLangPath(`/recreation`, lang)}>{lang === 'PL' ? 'Rekreacja' : 'Recreation'}</Link>
+            </li>
+            <li>
+              <Link to={getLangPath(`/breeding`, lang)}>{lang === 'PL' ? 'Hodowla' : 'Breeding'}</Link>
+            </li>
+            <li>
+              <Link to={getLangPath(`/contact`, lang)}>{lang === 'PL' ? 'Kontakt' : 'Contact'}</Link>
             </li>
           </ul>
-        </div>
-        <div className="uk-navbar-right">
-          <button className="uk-button uk-button-default uk-margin-right" type="button">
-            Categories
-          </button>
-          <div uk-dropdown="animation: uk-animation-slide-top-small; duration: 1000">
-            <ul className="uk-nav uk-dropdown-nav">
-              <li>
-                <Link to={getLangPath(`/about`, lang)}>About us</Link>
-              </li>
-              <li>
-                <Link to={getLangPath(`/horse/Eliot`, lang)}>Eliot</Link>
-              </li>
-            </ul>
+          <div className="social">
+            <a href="https://www.facebook.com/premiumsporthorsesjz">
+              <span className="sr-only">Facebook page</span>
+              <FacebookIcon /> <span role="img" aria-label="Polish Flag"></span>
+            </a>
           </div>
         </div>
       </nav>
-      <Link to={getLangPath(path, 'Eng')}>English</Link>
-      <Link to={getLangPath(path, 'PL')}>Polish</Link>
-    </div>
+
+      <div className="languageSwitcher">
+        {lang === 'PL' ? (
+          <Link to={getLangPath(path, 'Eng')}>
+            English
+            <span role="img" aria-label="UK Flag">
+              🇬🇧
+            </span>
+          </Link>
+        ) : (
+          <Link to={getLangPath(path, 'PL')}>
+            PL{' '}
+            <span role="img" aria-label="Polish Flag">
+              🇵🇱
+            </span>
+          </Link>
+        )}
+      </div>
+    </header>
   );
 };
+
+const query = graphql`
+  query {
+    strapiGlobalSettings {
+      siteName
+      Logo {
+        childImageSharp {
+          fixed(width: 200) {
+            ...GatsbyImageSharpFixed_noBase64
+          }
+        }
+      }
+    }
+  }
+`;
 
 export default Nav;

@@ -1,7 +1,6 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import Layout from '../components/layout';
-import '../assets/css/main.css';
 import Card from '../components/card';
 
 const HorsesPage = (props) => {
