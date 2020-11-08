@@ -54,9 +54,9 @@
 }
 
 .btn-more {
-  @include addSkewEffect(26px, $darkBlue);
+  @include addSkewEffect(30px, $darkBlue);
 
-  padding: 0 10px;
+  padding: 0 40px;
   display: inline-block;
   text-align: left;
   font-size: 12px;

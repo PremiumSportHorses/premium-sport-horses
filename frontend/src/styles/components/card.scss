@@ -69,6 +69,8 @@
 .table {
   border: 1px solid $beige;
   font-size: 12px;
+  // background-color: transparentize($color: $beige, $amount: 0.8);
+  background-color: $white;
 
   @include mediaFrom($tablet) {
     font-size: 14px;
