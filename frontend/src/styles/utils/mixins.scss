@@ -10,7 +10,7 @@
 }
 
 @mixin addSkewEffect($height: 24px, $color: $beige) {
-  background: $beige;
+  background: $color;
   line-height: $height;
   position: relative;
 

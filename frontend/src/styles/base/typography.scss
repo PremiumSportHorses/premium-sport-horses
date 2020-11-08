@@ -12,3 +12,43 @@
     @include addSkewEffect(24px, $beige);
   }
 }
+
+.pageDescription {
+  max-width: 800px;
+  margin: 30px auto 50px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.label {
+  font-size: 14px;
+}
+
+.btn-primary {
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 14px;
+  margin-top: 20px;
+  padding: 12px 30px 10px;
+  text-transform: uppercase;
+  color: $white;
+  background-color: $darkBlue;
+  border-radius: 3px;
+}
+
+.btn-tertiary {
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 14px;
+  margin-top: 20px;
+  padding: 12px 30px 10px;
+  text-transform: uppercase;
+  color: $darkBlue;
+  background-color: transparent;
+  border: 1px solid $darkBlue;
+  border-radius: 3px;
+}

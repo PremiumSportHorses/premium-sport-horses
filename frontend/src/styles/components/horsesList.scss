@@ -1,0 +1,22 @@
+.filters {
+  text-align: center;
+}
+
+.prices {
+  display: flex;
+  justify-content: space-around;
+  font-size: 14px;
+}
+
+.filterItem {
+  &.active {
+    font-weight: 600;
+  }
+}
+
+.noResults {
+  text-align: center;
+  padding: 40px;
+  max-width: 600px;
+  margin: 0 auto;
+}

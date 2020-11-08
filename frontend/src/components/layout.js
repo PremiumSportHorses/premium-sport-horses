@@ -35,7 +35,7 @@ const Layout = ({ children, lang, path }) => (
   <>
     <Seo />
     <Nav lang={lang} path={path} />
-    <main>{children}</main>
+    <main className="main">{children}</main>
   </>
 );
 
