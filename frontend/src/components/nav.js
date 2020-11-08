@@ -4,7 +4,7 @@ import { getLangPath } from '../utils/lang';
 import { useStaticQuery, graphql } from 'gatsby';
 import Img from 'gatsby-image';
 
-import './nav.scss';
+import '../styles/components/nav.scss';
 import FacebookIcon from './icons/facebook-icon';
 
 // const Nav = () => (

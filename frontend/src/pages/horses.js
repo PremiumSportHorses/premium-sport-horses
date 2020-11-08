@@ -102,9 +102,11 @@ const HorsesPage = (props) => {
           )}
         </div>
       )}
-      {horses.map((horse) => (
-        <Card lang={lang} horse={horse} key={horse.name} />
-      ))}
+      <div className="cardsList">
+        {horses.map((horse) => (
+          <Card lang={lang} horse={horse} key={horse.name} />
+        ))}
+      </div>
     </Layout>
   );
 };
@@ -117,10 +119,15 @@ const query = graphql`
         description_langPL
         age
         price
+        breed_langPL
+        breed_langEng
+        height
+        gender
+        level
         mainImage {
           publicURL
           childImageSharp {
-            fixed(width: 300) {
+            fixed(width: 400) {
               ...GatsbyImageSharpFixed_noBase64
             }
           }
