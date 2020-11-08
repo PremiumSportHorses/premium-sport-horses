@@ -7,9 +7,9 @@ import '../styles/components/card.scss';
 
 const Card = ({ lang, horse }) => {
   return (
-    <Link to={getLangPath(`/horse/${horse.name}`, lang)} className="card">
+    <div className="card">
       <div className="card-image">
-        <Img fixed={horse.mainImage.childImageSharp.fixed} imgStyle={{ position: 'static' }} />
+        <Img fluid={{ ...horse.mainImage.childImageSharp.fluid, aspectRatio: 1.5 }} />
       </div>
       <div className="card-description">
         <h3 className="card-title">{horse.name}</h3>
@@ -48,10 +48,12 @@ const Card = ({ lang, horse }) => {
           </div>
         </div>
         <p className="card-actions">
-          <span className="btn-more">{lang === 'PL' ? 'Zobacz więcej' : 'Read more'}</span>
+          <Link to={getLangPath(`/horse/${horse.name}`, lang)}>
+            <span className="btn-more">{lang === 'PL' ? 'Zobacz więcej' : 'Read more'}</span>
+          </Link>
         </p>
       </div>
-    </Link>
+    </div>
   );
 };
 

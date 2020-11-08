@@ -2,22 +2,47 @@
 
 .card {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  padding: 20px;
   text-decoration: none;
   transition: background-color 0.3s ease-in-out;
+  margin-bottom: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  // background-color: transparentize($color: $beige, $amount: 0.8);
+  // border: 1px solid $beige;
+  max-width: 400px;
 
-  &:hover {
-    background-color: transparentize($color: $beige, $amount: 0.5);
+  @include mediaFrom($tablet) {
+    margin-bottom: 20px;
+    max-width: 100%;
+  }
+
+  .card-image {
+    width: 100%;
+
+    @include mediaFrom($tablet) {
+      width: 50%;
+    }
   }
 
   .card-description {
-    padding-left: 20px;
     flex-grow: 1;
+    padding: 0 10px;
+
+    @include mediaFrom($desktop) {
+      padding: 0 20px;
+    }
   }
 
   .card-title {
     text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 5px;
+
+    @include mediaFrom($tablet) {
+      text-align: left;
+    }
   }
 
   .card-info {
@@ -27,16 +52,27 @@
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    text-align: center;
+    margin-top: 5px;
+
+    @include mediaFrom($tablet) {
+      text-align: left;
+    }
   }
 
   .card-actions {
     text-align: center;
+    margin-top: 25px;
   }
 }
 
 .table {
   border: 1px solid $beige;
-  font-size: 14px;
+  font-size: 12px;
+
+  @include mediaFrom($tablet) {
+    font-size: 14px;
+  }
 
   .table-row {
     display: flex;

@@ -127,8 +127,8 @@ const query = graphql`
         mainImage {
           publicURL
           childImageSharp {
-            fixed(width: 400) {
-              ...GatsbyImageSharpFixed_noBase64
+            fluid(maxWidth: 500) {
+              ...GatsbyImageSharpFluid_noBase64
             }
           }
         }
