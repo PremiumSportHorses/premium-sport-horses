@@ -1,5 +1,6 @@
-@import 'normalize.css';
 @import 'utils';
+@import 'base/normalize.css';
+@import 'base/typography';
 
 * {
   box-sizing: border-box;
@@ -12,6 +13,18 @@ body {
 
   @include mediaFrom($desktop) {
     padding-top: $navHeightDesktop;
+  }
+}
+
+.main {
+  max-width: $maxContent;
+  margin: 0 auto;
+  padding-left: $offset;
+  padding-right: $offset;
+
+  @include mediaFrom($tablet) {
+    padding-left: $offsetTablet;
+    padding-right: $offsetTablet;
   }
 }
 
