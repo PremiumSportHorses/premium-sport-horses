@@ -69,85 +69,101 @@ const Nav = ({ lang, path }) => {
     strapiGlobalSettings.logoMobile.childImageSharp.fixed,
     {
       ...strapiGlobalSettings.Logo.childImageSharp.fixed,
-      media: `(min-width: 768px)`,
+      media: `(min-width: 1024px)`,
     },
   ];
 
-  console.log(sources);
-
   return (
-    <header className="mainHeader">
-      <div className="logo">
-        <Link to="/">
-          <Img fixed={sources} alt="Premium Sport Horses Logo" />
-          <span className="companyName">{strapiGlobalSettings.siteName}</span>
-        </Link>
-      </div>
-      <nav className="mainNav">
-        <button
-          className="navbarToggler"
-          type="button"
-          aria-controls="menu"
-          aria-expanded={isOpen}
-          aria-label="Toggle navigation"
-          onClick={() => {
-            setIsOpen(!isOpen);
-          }}
-        >
-          <span className="sr-only">Open Menu</span>
-          <span className="bar"></span>
-          <span className="bar"></span>
-          <span className="bar"></span>
-        </button>
-        <div className={`links${isOpen ? ' isOpen' : ''}`} id="menu">
-          <ul className="links-list">
-            <li>
-              <Link to={getLangPath(`/about`, lang)}>{lang === 'PL' ? 'O nas' : 'About us'}</Link>
-            </li>
-            <li>
-              <Link to={getLangPath(`/partners`, lang)}>{lang === 'PL' ? 'Nasi Partnerzy' : 'Our Partners'}</Link>
-            </li>
-            <li>
-              <Link to={getLangPath(`/horses`, lang)}>{lang === 'PL' ? 'Sprzedaz Koni' : 'Horses for Sale'}</Link>
-            </li>
-            <li>
-              <Link to={getLangPath(`/trainings`, lang)}>{lang === 'PL' ? 'Treningi Sportowe' : 'Trainings'}</Link>
-            </li>
-            <li>
-              <Link to={getLangPath(`/recreation`, lang)}>{lang === 'PL' ? 'Rekreacja' : 'Recreation'}</Link>
-            </li>
-            <li>
-              <Link to={getLangPath(`/breeding`, lang)}>{lang === 'PL' ? 'Hodowla' : 'Breeding'}</Link>
-            </li>
-            <li>
-              <Link to={getLangPath(`/contact`, lang)}>{lang === 'PL' ? 'Kontakt' : 'Contact'}</Link>
-            </li>
-          </ul>
-          <div className="languageSwitcher">
-            {lang === 'PL' ? (
-              <Link to={getLangPath(path, 'Eng')}>
-                English Version
-                <span role="img" aria-label="UK Flag">
-                  🇬🇧
-                </span>
-              </Link>
-            ) : (
-              <Link to={getLangPath(path, 'PL')}>
-                Polska wersja
-                <span role="img" aria-label="Polish Flag">
-                  🇵🇱
-                </span>
-              </Link>
-            )}
-          </div>
-          <div className="social">
-            <a href="https://www.facebook.com/premiumsporthorsesjz">
-              <span className="sr-only">Facebook page</span>
-              <FacebookIcon /> <span role="img" aria-label="Polish Flag"></span>
-            </a>
-          </div>
+    <header className={`mainHeader${isOpen ? ' navOpen' : ''}`}>
+      <div className="mainHeader-content">
+        <div className="logo">
+          <Link to="/">
+            <Img fixed={sources} alt="Premium Sport Horses Logo" />
+            <span className="companyName">{strapiGlobalSettings.siteName}</span>
+          </Link>
         </div>
-      </nav>
+        <nav className="mainNav">
+          <button
+            className="navbarToggler"
+            type="button"
+            aria-controls="menu"
+            aria-expanded={isOpen}
+            aria-label="Toggle navigation"
+            onClick={() => {
+              setIsOpen(!isOpen);
+            }}
+          >
+            <span className="sr-only">Open Menu</span>
+            <span className="bar"></span>
+            <span className="bar"></span>
+            <span className="bar"></span>
+          </button>
+          <div className="additionalLinks">
+            <div className="languageSwitcher">
+              {lang === 'PL' ? (
+                <Link to={getLangPath(path, 'Eng')}>
+                  <span className="flag" role="img" aria-label="UK Flag">
+                    🇬🇧
+                  </span>
+                  English
+                </Link>
+              ) : (
+                <Link to={getLangPath(path, 'PL')}>
+                  <span className="flag" role="img" aria-label="Polish Flag">
+                    🇵🇱
+                  </span>
+                  Polski
+                </Link>
+              )}
+            </div>
+            <div className="social">
+              <a href="https://www.facebook.com/premiumsporthorsesjz">
+                <FacebookIcon />
+                <span className="text">Facebook</span>
+              </a>
+            </div>
+          </div>
+          <div className="links" id="menu">
+            <ul className="links-list">
+              <li>
+                <Link activeClassName="active" to={getLangPath(`/about`, lang)}>
+                  {lang === 'PL' ? 'O nas' : 'About us'}
+                </Link>
+              </li>
+              <li>
+                <Link activeClassName="active" to={getLangPath(`/partners`, lang)}>
+                  {lang === 'PL' ? 'Nasi Partnerzy' : 'Our Partners'}
+                </Link>
+              </li>
+              <li>
+                <Link activeClassName="active" to={getLangPath(`/horses`, lang)}>
+                  {lang === 'PL' ? 'Sprzedaz Koni' : 'Horses for Sale'}
+                </Link>
+              </li>
+              <li>
+                <Link activeClassName="active" to={getLangPath(`/trainings`, lang)}>
+                  {lang === 'PL' ? 'Treningi Sportowe' : 'Trainings'}
+                </Link>
+              </li>
+              <li>
+                <Link activeClassName="active" to={getLangPath(`/recreation`, lang)}>
+                  {lang === 'PL' ? 'Rekreacja' : 'Recreation'}
+                </Link>
+              </li>
+              <li>
+                <Link activeClassName="active" to={getLangPath(`/breeding`, lang)}>
+                  {lang === 'PL' ? 'Hodowla' : 'Breeding'}
+                </Link>
+              </li>
+              <li>
+                <Link activeClassName="active" to={getLangPath(`/contact`, lang)}>
+                  {lang === 'PL' ? 'Kontakt' : 'Contact'}
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
     </header>
   );
 };
@@ -158,7 +174,7 @@ const query = graphql`
       siteName
       Logo {
         childImageSharp {
-          fixed(width: 200) {
+          fixed(height: 86) {
             ...GatsbyImageSharpFixed_noBase64
           }
         }

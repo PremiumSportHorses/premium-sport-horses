@@ -1,13 +1,15 @@
 const PlPrefix = 'pl/';
 
 export const getLangPath = (path, lang) => {
+  let languagePath = path;
+
   if (lang === 'PL' && path.indexOf(PlPrefix) < 0) {
-    return `${PlPrefix}${path}`;
+    languagePath = `${PlPrefix}${path}`;
   }
 
   if (lang === 'Eng' && path.indexOf(PlPrefix) >= 0) {
-    return path.replace(PlPrefix, '');
+    languagePath = path.replace(PlPrefix, '');
   }
 
-  return path;
+  return languagePath[languagePath.length - 1] === '/' ? languagePath.slice(0, -1) : languagePath;
 };

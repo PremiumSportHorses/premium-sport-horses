@@ -8,6 +8,15 @@
 body {
   font-family: 'Montserrat', sans-serif;
   color: $darkBlue;
+  padding-top: $navHeight;
+
+  @include mediaFrom($desktop) {
+    padding-top: $navHeightDesktop;
+  }
+}
+
+a {
+  color: inherit;
 }
 
 *:focus {
@@ -27,4 +36,8 @@ body {
      keyboard-focus on browsers that do support
      :focus-visible */
   outline-color: #3f68ea;
+}
+
+.sr-only {
+  @include sr-only;
 }
