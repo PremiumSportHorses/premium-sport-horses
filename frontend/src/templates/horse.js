@@ -28,7 +28,9 @@ const Horse = ({ data, pageContext, path }) => {
 
   return (
     <Layout lang={lang} path={path}>
-      <h1>{horse.name}</h1>
+      <h1 className="pageTitle">
+        <span>{horse.name}</span>
+      </h1>
       <div className="uk-section">
         <div className="uk-container uk-container-small">
           <Markdown source={horse[`description_lang${lang}`]} escapeHtml={false} />

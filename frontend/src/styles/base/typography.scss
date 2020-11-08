@@ -2,36 +2,13 @@
   text-align: center;
   font-weight: 400;
   font-size: 15px;
-
-  $height: 24px;
+  margin-top: 40px;
 
   span {
-    background: $beige;
-    text-transform: uppercase;
-    line-height: $height;
     padding: 2px 30px 0;
+    text-transform: uppercase;
     display: inline-block;
-    position: relative;
 
-    &:before,
-    &:after {
-      content: '';
-      display: block;
-      background: $beige;
-      width: 20px;
-      height: $height + 2px;
-      position: absolute;
-      top: 0;
-    }
-
-    &:before {
-      left: 0;
-      transform: skewX(-30deg) translateX(-50%);
-    }
-
-    &:after {
-      right: 0;
-      transform: skewX(-30deg) translateX(50%);
-    }
+    @include addSkewEffect(24px, $beige);
   }
 }

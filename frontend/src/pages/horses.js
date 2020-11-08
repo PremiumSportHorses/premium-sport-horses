@@ -10,7 +10,9 @@ const HorsesPage = (props) => {
 
   return (
     <Layout lang={lang} path={path}>
-      <h1>{lang === 'PL' ? 'Na sprzedaz' : 'Horses for sale'}</h1>
+      <h1 className="pageTitle">
+        <span>{lang === 'PL' ? 'Konie Na Sprzedaż' : 'Horses For Sale'}</span>
+      </h1>
       {data.nodes.map((horse) => (
         <Card lang={lang} horse={horse} key={horse.name} />
       ))}

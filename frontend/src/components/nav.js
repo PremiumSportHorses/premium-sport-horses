@@ -137,7 +137,7 @@ const Nav = ({ lang, path }) => {
               </li>
               <li>
                 <Link activeClassName="active" to={getLangPath(`/horses`, lang)}>
-                  {lang === 'PL' ? 'Sprzedaz Koni' : 'Horses for Sale'}
+                  {lang === 'PL' ? 'Sprzedaż Koni' : 'Horses for Sale'}
                 </Link>
               </li>
               <li>

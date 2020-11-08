@@ -1,9 +1,5 @@
 @import '../styles/utils';
 
-$offset: 15px;
-$offsetTablet: 25px;
-$zIndexNav: 2;
-
 .mainHeader {
   position: absolute;
   border-bottom: 2px $beige solid;
@@ -25,6 +21,7 @@ $zIndexNav: 2;
       max-width: $maxContent;
       margin: 0 auto;
       position: relative;
+      justify-content: space-between;
     }
   }
 
@@ -61,7 +58,7 @@ $zIndexNav: 2;
     flex-grow: 1;
 
     @include mediaFrom($desktop) {
-      max-width: 820px;
+      max-width: 840px;
     }
 
     @include mediaFrom($desktopXL) {
@@ -121,19 +118,24 @@ $zIndexNav: 2;
 
       @include mediaFrom($desktop) {
         border-color: transparent;
-        padding: 5px 7px 3px;
+        padding: 5px 5px 0;
         font-size: 14px;
+        line-height: 24px;
+      }
+
+      @include mediaFrom($desktopXL) {
+        text-transform: uppercase;
       }
 
       &:hover {
-        border-color: $darkBlue;
+        border-color: transparentize($darkBlue, 0.5);
       }
 
       &.active {
         font-weight: 600;
 
-        @include mediaFrom($desktop) {
-          border-color: $darkBlue;
+        &:hover {
+          border-color: transparent;
         }
       }
     }
