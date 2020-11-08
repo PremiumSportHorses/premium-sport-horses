@@ -77,7 +77,7 @@ const Nav = ({ lang, path }) => {
     <header className={`mainHeader${isOpen ? ' navOpen' : ''}`}>
       <div className="mainHeader-content">
         <div className="logo">
-          <Link to="/">
+          <Link to={getLangPath('/', lang)}>
             <Img fixed={sources} alt="Premium Sport Horses Logo" />
             <span className="companyName">{strapiGlobalSettings.siteName}</span>
           </Link>
