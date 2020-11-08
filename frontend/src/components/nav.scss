@@ -111,23 +111,30 @@ $zIndexNav: 2;
     a {
       padding: 10px;
       display: block;
-      font-weight: 600;
       text-decoration: none;
       border-bottom: 1px solid transparentize($darkBlue, 0.5);
+      transition: border-color 0.3s ease-in-out;
 
       @include mediaFrom($tablet) {
         padding: 20px;
       }
 
       @include mediaFrom($desktop) {
-        border: none;
-        padding: 7px;
+        border-color: transparent;
+        padding: 5px 7px 3px;
         font-size: 14px;
-        font-weight: 400;
+      }
+
+      &:hover {
+        border-color: $darkBlue;
       }
 
       &.active {
-        text-decoration: underline;
+        font-weight: 600;
+
+        @include mediaFrom($desktop) {
+          border-color: $darkBlue;
+        }
       }
     }
   }

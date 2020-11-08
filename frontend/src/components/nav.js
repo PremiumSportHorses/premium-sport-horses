@@ -117,7 +117,7 @@ const Nav = ({ lang, path }) => {
               )}
             </div>
             <div className="social">
-              <a href="https://www.facebook.com/premiumsporthorsesjz">
+              <a target="_blank" href="https://www.facebook.com/premiumsporthorsesjz">
                 <FacebookIcon />
                 <span className="text">Facebook</span>
               </a>

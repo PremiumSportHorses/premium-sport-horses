@@ -1,7 +1,6 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import Layout from '../components/layout';
-import '../assets/css/main.css';
 
 const AboutPage = (props) => {
   const data = useStaticQuery(query).strapiAboutUs;
