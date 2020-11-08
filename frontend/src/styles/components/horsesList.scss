@@ -1,16 +1,31 @@
+@import '../utils';
+
 .filters {
   text-align: center;
 }
 
 .prices {
-  display: flex;
-  justify-content: space-around;
-  font-size: 14px;
+  margin-bottom: 30px;
+
+  @include mediaFrom($tablet) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }
 
 .filterItem {
+  cursor: pointer;
+  padding: 4px 8px;
+  margin: 5px;
+  display: inline-block;
+  font-size: 12px;
+  border: 1px solid $darkBlue;
+  border-radius: 3px;
+  font-weight: 600;
+
   &.active {
-    font-weight: 600;
+    background-color: $beige;
   }
 }
 

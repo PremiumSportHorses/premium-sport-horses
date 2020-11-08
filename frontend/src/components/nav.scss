@@ -134,8 +134,10 @@
       &.active {
         font-weight: 600;
 
-        &:hover {
-          border-color: transparent;
+        @include mediaFrom($desktop) {
+          &:hover {
+            border-color: transparent;
+          }
         }
       }
     }
