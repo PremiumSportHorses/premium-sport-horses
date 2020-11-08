@@ -65,16 +65,22 @@ const Nav = ({ lang, path }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { strapiGlobalSettings } = useStaticQuery(query);
 
+  const sources = [
+    strapiGlobalSettings.logoMobile.childImageSharp.fixed,
+    {
+      ...strapiGlobalSettings.Logo.childImageSharp.fixed,
+      media: `(min-width: 768px)`,
+    },
+  ];
+
+  console.log(sources);
+
   return (
     <header className="mainHeader">
       <div className="logo">
         <Link to="/">
-          {' '}
-          <Img
-            fixed={strapiGlobalSettings.Logo.childImageSharp.fixed}
-            imgStyle={{ position: 'static' }}
-            alt="Premium Sport Horses Logo"
-          />
+          <Img fixed={sources} alt="Premium Sport Horses Logo" />
+          <span className="companyName">{strapiGlobalSettings.siteName}</span>
         </Link>
       </div>
       <nav className="mainNav">
@@ -88,7 +94,10 @@ const Nav = ({ lang, path }) => {
             setIsOpen(!isOpen);
           }}
         >
-          <span className="navbar-toggler-icon">Menu</span>
+          <span className="sr-only">Open Menu</span>
+          <span className="bar"></span>
+          <span className="bar"></span>
+          <span className="bar"></span>
         </button>
         <div className={`links${isOpen ? ' isOpen' : ''}`} id="menu">
           <ul className="links-list">
@@ -114,6 +123,23 @@ const Nav = ({ lang, path }) => {
               <Link to={getLangPath(`/contact`, lang)}>{lang === 'PL' ? 'Kontakt' : 'Contact'}</Link>
             </li>
           </ul>
+          <div className="languageSwitcher">
+            {lang === 'PL' ? (
+              <Link to={getLangPath(path, 'Eng')}>
+                English Version
+                <span role="img" aria-label="UK Flag">
+                  🇬🇧
+                </span>
+              </Link>
+            ) : (
+              <Link to={getLangPath(path, 'PL')}>
+                Polska wersja
+                <span role="img" aria-label="Polish Flag">
+                  🇵🇱
+                </span>
+              </Link>
+            )}
+          </div>
           <div className="social">
             <a href="https://www.facebook.com/premiumsporthorsesjz">
               <span className="sr-only">Facebook page</span>
@@ -122,24 +148,6 @@ const Nav = ({ lang, path }) => {
           </div>
         </div>
       </nav>
-
-      <div className="languageSwitcher">
-        {lang === 'PL' ? (
-          <Link to={getLangPath(path, 'Eng')}>
-            English
-            <span role="img" aria-label="UK Flag">
-              🇬🇧
-            </span>
-          </Link>
-        ) : (
-          <Link to={getLangPath(path, 'PL')}>
-            PL{' '}
-            <span role="img" aria-label="Polish Flag">
-              🇵🇱
-            </span>
-          </Link>
-        )}
-      </div>
     </header>
   );
 };
@@ -151,6 +159,13 @@ const query = graphql`
       Logo {
         childImageSharp {
           fixed(width: 200) {
+            ...GatsbyImageSharpFixed_noBase64
+          }
+        }
+      }
+      logoMobile {
+        childImageSharp {
+          fixed(height: 40) {
             ...GatsbyImageSharpFixed_noBase64
           }
         }

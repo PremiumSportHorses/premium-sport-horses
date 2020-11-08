@@ -82,7 +82,8 @@ const SEO = ({ seo = {} }) => {
         },
         {
           rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/css?family=Staatliches',
+          href:
+            'https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,400;0,600;1,200;1,400;1,600&display=swap',
         },
       ]}
       meta={metaTags}

@@ -1,9 +1,121 @@
+@import '../styles/utils';
+
+$offset: 10px;
+$zIndexNav: 2;
+
 .mainHeader {
+  position: relative;
+  border-bottom: 2px $beige solid;
+
+  .logo {
+    padding: 10px $offset 5px;
+    display: inline-block;
+
+    a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: $darkBlue;
+    }
+  }
+
+  .companyName {
+    font-size: 14px;
+    font-style: italic;
+    font-weight: 600;
+    display: block;
+    margin-left: 15px;
+  }
+
   .links {
     display: none;
+    position: fixed;
+    background: $white;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: $zIndexNav;
 
     &.isOpen {
       display: block;
     }
+
+    @include mediaFrom($desktop) {
+      display: block;
+      position: static;
+    }
+  }
+
+  .navbarToggler {
+    background: transparent;
+    border: 0;
+    width: 40px;
+    height: 30px;
+    padding: 5px;
+    position: absolute;
+    z-index: $zIndexNav + 1;
+    top: 50%;
+    transform: translateY(-50%);
+    right: $offset;
+    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
+      opacity 0.55s ease;
+
+    @include mediaFrom($desktop) {
+      display: none;
+    }
+  }
+
+  $barSpacing: 5px;
+  .bar {
+    display: block;
+    width: 30px;
+    height: 2px;
+    border-radius: 1px;
+    background: $darkBlue;
+    position: absolute;
+    left: 5px;
+    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), opacity 0.55s ease,
+      width 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), left 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+
+    &:nth-child(2) {
+      top: $barSpacing;
+      transform-origin: 0% 0%;
+    }
+
+    &:nth-last-child(2) {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    &:last-of-type {
+      margin-bottom: 0;
+      bottom: $barSpacing;
+      transform-origin: 0% 100%;
+    }
+  }
+
+  .navbarToggler[aria-expanded='true'] {
+    .bar {
+      opacity: 1;
+      width: 26px;
+      left: 11px;
+
+      &:nth-child(2) {
+        transform: rotate(45deg);
+      }
+
+      &:nth-last-child(2) {
+        opacity: 0;
+      }
+
+      &:last-of-type {
+        transform: rotate(-45deg);
+      }
+    }
+  }
+
+  .social {
+    max-width: 50px;
   }
 }
