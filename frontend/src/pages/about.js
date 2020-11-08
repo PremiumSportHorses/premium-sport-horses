@@ -12,7 +12,7 @@ const AboutPage = (props) => {
       <h1 className="pageTitle">
         <span>{lang === 'PL' ? 'O nas' : 'About us'}</span>
       </h1>
-      <p>{data[`Description_lang${lang}`]}</p>
+      <p className="pageDescription">{data[`Description_lang${lang}`]}</p>
     </Layout>
   );
 };

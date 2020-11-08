@@ -13,6 +13,8 @@ const Card = ({ lang, horse }) => {
       </div>
       <div className="card-description">
         <h3 className="card-title">{horse.name}</h3>
+        <h4 className="card-info">{horse[`description_lang${lang}`]}</h4>
+
         <div className="table">
           <div className="table-row">
             <div className="table-cell">
@@ -45,6 +47,9 @@ const Card = ({ lang, horse }) => {
             </div>
           </div>
         </div>
+        <p className="card-actions">
+          <span className="btn-more">{lang === 'PL' ? 'Zobacz więcej' : 'Read more'}</span>
+        </p>
       </div>
     </Link>
   );

@@ -13,6 +13,7 @@
   background: $color;
   line-height: $height;
   position: relative;
+  z-index: 1;
 
   &:before,
   &:after {

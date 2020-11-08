@@ -52,3 +52,15 @@
   border: 1px solid $darkBlue;
   border-radius: 3px;
 }
+
+.btn-more {
+  @include addSkewEffect(24px, $darkBlue);
+
+  padding: 0 10px 2px;
+  display: inline-block;
+  text-align: left;
+  font-size: 12px;
+  color: $white;
+  background-color: $darkBlue;
+  text-transform: uppercase;
+}

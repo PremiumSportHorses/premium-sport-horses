@@ -1,8 +1,9 @@
 import React from 'react';
-import { graphql } from 'gatsby';
+import { graphql, Link } from 'gatsby';
 import Markdown from 'react-markdown';
 import Img from 'gatsby-image';
 import Layout from '../components/layout';
+import { getLangPath } from '../utils/lang';
 
 export const query = graphql`
   query HorseQuery($slug: String!) {
@@ -31,12 +32,13 @@ const Horse = ({ data, pageContext, path }) => {
       <h1 className="pageTitle">
         <span>{horse.name}</span>
       </h1>
-      <div className="uk-section">
-        <div className="uk-container uk-container-small">
-          <Markdown source={horse[`description_lang${lang}`]} escapeHtml={false} />
-          <hr className="uk-divider-small" />
-          <Img fixed={horse.image.childImageSharp.fixed} imgStyle={{ position: 'static' }} />
-        </div>
+      <div className="pageDescription">
+        To Do
+        <Markdown source={horse[`description_lang${lang}`]} escapeHtml={false} />
+        {/* <Img fixed={horse.image.childImageSharp.fixed} imgStyle={{ position: 'static' }} /> */}
+        <Link to={getLangPath(`/horses`, lang)} className="btn-tertiary">
+          {lang === 'PL' ? 'Zobacz wszystkie konie' : 'See all horses'}
+        </Link>
       </div>
     </Layout>
   );
