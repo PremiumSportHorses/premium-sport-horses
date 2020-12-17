@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { graphql, Link, useStaticQuery } from 'gatsby';
+import { graphql, useStaticQuery } from 'gatsby';
 import Layout from '../components/layout';
 import Card from '../components/card';
 
@@ -38,31 +38,31 @@ const HorsesPage = (props) => {
             setActiveFilter={setActiveFilter}
           />
           <FilterItem
-            value="*"
+            value="OneStar"
             label={`* ${lang === 'PL' ? 'poniżej' : 'below'} 15 000 EUR`}
             activeValue={activeFilter}
             setActiveFilter={setActiveFilter}
           />
           <FilterItem
-            value="**"
+            value="TwoStars"
             label="** 15 000 EUR - 25 000 EUR"
             activeValue={activeFilter}
             setActiveFilter={setActiveFilter}
           />
           <FilterItem
-            value="***"
+            value="ThreeStars"
             label="*** 25 000 EUR - 40 000 EUR"
             activeValue={activeFilter}
             setActiveFilter={setActiveFilter}
           />
           <FilterItem
-            value="****"
+            value="FourStars"
             label="**** 40 000 EUR - 60 000 EUR"
             activeValue={activeFilter}
             setActiveFilter={setActiveFilter}
           />
           <FilterItem
-            value="*****"
+            value="FiveStars"
             label={`***** ${lang === 'PL' ? 'powyżej' : 'above'} 60 000 EUR`}
             activeValue={activeFilter}
             setActiveFilter={setActiveFilter}

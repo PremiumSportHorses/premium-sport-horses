@@ -5,6 +5,14 @@ import { getLangPath, getHorseGenderLabel } from '../utils/lang';
 
 import '../styles/components/card.scss';
 
+const horsePrices = {
+  OneStar: '*',
+  TwoStars: '**',
+  ThreeStars: '***',
+  FourStars: '****',
+  FiveStars: '*****',
+};
+
 const Card = ({ lang, horse }) => {
   return (
     <div className="card">
@@ -43,7 +51,7 @@ const Card = ({ lang, horse }) => {
             </div>
             <div className="table-cell">
               <span className="label">{lang === 'PL' ? 'Cena' : 'Price'}: </span>
-              <span className="value">{horse.price}</span>
+              <span className="value">{horsePrices[horse.price]}</span>
             </div>
           </div>
         </div>
