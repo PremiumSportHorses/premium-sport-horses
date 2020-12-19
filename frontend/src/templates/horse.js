@@ -3,7 +3,10 @@ import { graphql, Link } from 'gatsby';
 import Markdown from 'react-markdown';
 import Img from 'gatsby-image';
 import Layout from '../components/layout';
-import { getLangPath } from '../utils/lang';
+import { getHorseGenderLabel, getLangPath } from '../utils/lang';
+import { horsePrices } from '../utils/prices';
+
+import '../styles/components/horseDetails.scss';
 
 export const query = graphql`
   query HorseQuery($slug: String!) {
@@ -11,11 +14,19 @@ export const query = graphql`
       name
       description_langPL
       description_langEng
+      description_langPL
+      age
+      price
+      breed_langPL
+      breed_langEng
+      height
+      gender
+      level
       image: mainImage {
         publicURL
         childImageSharp {
-          fixed(width: 300) {
-            ...GatsbyImageSharpFixed_noBase64
+          fluid(maxWidth: 700) {
+            ...GatsbyImageSharpFluid_noBase64
           }
         }
       }
@@ -33,13 +44,52 @@ const Horse = ({ data, pageContext, path }) => {
         <span>{horse.name}</span>
       </h1>
       <div className="pageDescription">
-        To Do
         <Markdown source={horse[`description_lang${lang}`]} escapeHtml={false} />
-        {/* <Img fixed={horse.image.childImageSharp.fixed} imgStyle={{ position: 'static' }} /> */}
-        <Link to={getLangPath(`/horses`, lang)} className="btn-tertiary">
-          {lang === 'PL' ? 'Zobacz wszystkie konie' : 'See all horses'}
-        </Link>
       </div>
+      <div className="horse-keyInformation">
+        <Img fixed={horse.image.childImageSharp.fluid} imgStyle={{ position: 'static' }} />
+        <div className="table">
+          <div className="table-row">
+            <div className="table-cell">
+              <span className="label">{lang === 'PL' ? 'Wiek' : 'Age'}: </span>
+              <span className="value">{horse.age} </span>
+            </div>
+          </div>
+          <div className="table-row">
+            <div className="table-cell">
+              <span className="label">{lang === 'PL' ? 'Rasa' : 'Breed'}: </span>
+              <span className="value">{lang === 'PL' ? horse.breed_langPL : horse.breed_langEng} </span>
+            </div>
+          </div>
+          <div className="table-row">
+            <div className="table-cell">
+              <span className="label">{lang === 'PL' ? 'Wzrost' : 'Height'}: </span>
+              <span className="value">{horse.height} </span>
+            </div>
+          </div>
+          <div className="table-row">
+            <div className="table-cell">
+              <span className="label">{lang === 'PL' ? 'Płeć' : 'Gender'}: </span>
+              <span className="value">{getHorseGenderLabel(horse.gender, lang)}</span>
+            </div>
+          </div>
+          <div className="table-row">
+            <div className="table-cell">
+              <span className="label">{lang === 'PL' ? 'Poziom' : 'Level'}: </span>
+              <span className="value">{horse.level}</span>
+            </div>
+          </div>
+          <div className="table-row">
+            <div className="table-cell">
+              <span className="label">{lang === 'PL' ? 'Cena' : 'Price'}: </span>
+              <span className="value">{horsePrices[horse.price]}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <Link to={getLangPath(`/horses`, lang)} className="btn-tertiary">
+        {lang === 'PL' ? 'Zobacz wszystkie konie' : 'See all horses'}
+      </Link>
     </Layout>
   );
 };

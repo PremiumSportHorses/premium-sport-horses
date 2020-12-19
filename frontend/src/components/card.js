@@ -2,16 +2,9 @@ import React from 'react';
 import { Link } from 'gatsby';
 import Img from 'gatsby-image';
 import { getLangPath, getHorseGenderLabel } from '../utils/lang';
+import { horsePrices } from '../utils/prices';
 
 import '../styles/components/card.scss';
-
-const horsePrices = {
-  OneStar: '*',
-  TwoStars: '**',
-  ThreeStars: '***',
-  FourStars: '****',
-  FiveStars: '*****',
-};
 
 const Card = ({ lang, horse }) => {
   return (

@@ -1,0 +1,2 @@
+- src/templates/horse.js: image renditions
+- src/templates/horse.js: additional images (gallery)
