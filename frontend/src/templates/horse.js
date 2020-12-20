@@ -7,6 +7,7 @@ import { getHorseGenderLabel, getLangPath } from '../utils/lang';
 import { horsePrices } from '../utils/prices';
 
 import '../styles/components/horseDetails.scss';
+import { useWindowSize } from '../utils/windowSizeHook';
 
 export const query = graphql`
   query HorseQuery($slug: String!) {
@@ -60,10 +61,14 @@ const getYoutubeEmbedLink = (link) => {
   return items && `https://www.youtube.com/embed/${items[items.length - 1]}`;
 };
 
+const maxVideoWidth = 860;
+
 const Horse = ({ data, pageContext, path }) => {
   const { lang } = pageContext;
   const horse = data.strapiHorse;
   const youtube = getYoutubeEmbedLink(horse.youtubeLink);
+
+  const windowSize = useWindowSize();
 
   return (
     <Layout lang={lang} path={path}>
@@ -183,8 +188,8 @@ const Horse = ({ data, pageContext, path }) => {
             title="main video"
             id="ytplayer"
             type="text/html"
-            width="640"
-            height="360"
+            width={windowSize.width < maxVideoWidth ? windowSize.width - 47 : maxVideoWidth}
+            height={windowSize.width < maxVideoWidth ? windowSize.width * 0.6 : maxVideoWidth * 0.6}
             src={youtube}
             frameBorder="0"
           ></iframe>
