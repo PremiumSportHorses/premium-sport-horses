@@ -16,8 +16,10 @@
 
 .pedigree-wrapper {
   margin: 40px auto;
+  max-width: $maxContentNarrow;
 
   .pedigree {
+    margin: 0 auto;
     max-width: 100%;
     overflow-x: scroll;
 
@@ -65,4 +67,9 @@
   .label {
     text-transform: none;
   }
+}
+
+.video {
+  margin: 40px auto;
+  max-width: $maxContentNarrow;
 }

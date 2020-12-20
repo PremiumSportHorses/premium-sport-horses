@@ -30,6 +30,7 @@ export const query = graphql`
           }
         }
       }
+      youtubeLink
       Pedigree {
         MothersMothersMother
         father
@@ -50,9 +51,19 @@ export const query = graphql`
   }
 `;
 
+const getYoutubeEmbedLink = (link) => {
+  if (!link) {
+    return null;
+  }
+
+  const items = link.split('/');
+  return items && `https://www.youtube.com/embed/${items[items.length - 1]}`;
+};
+
 const Horse = ({ data, pageContext, path }) => {
   const { lang } = pageContext;
   const horse = data.strapiHorse;
+  const youtube = getYoutubeEmbedLink(horse.youtubeLink);
 
   return (
     <Layout lang={lang} path={path}>
@@ -103,66 +114,82 @@ const Horse = ({ data, pageContext, path }) => {
           </div>
         </div>
       </div>
-      <div className="pedigree-wrapper">
-        <h3 className="sectionTitle">{lang === 'PL' ? 'Rodowód' : 'Pedigree'}</h3>
-        <div className="pedigree">
-          <div className="table table-pedigree">
-            <div className="table-col">
-              <div className="table-cell">
-                <span className="label">{horse.name} </span>
+
+      {horse.Pedigree && (
+        <div className="pedigree-wrapper">
+          <h3 className="sectionTitle">{lang === 'PL' ? 'Rodowód' : 'Pedigree'}</h3>
+          <div className="pedigree">
+            <div className="table table-pedigree">
+              <div className="table-col">
+                <div className="table-cell">
+                  <span className="label">{horse.name} </span>
+                </div>
               </div>
-            </div>
-            <div className="table-col">
-              <div className="table-cell">
-                <span className="label">{horse.Pedigree.father}</span>
+              <div className="table-col">
+                <div className="table-cell">
+                  <span className="label">{horse.Pedigree.father}</span>
+                </div>
+                <div className="table-cell">
+                  <span className="label">{horse.Pedigree.mother}</span>
+                </div>
               </div>
-              <div className="table-cell">
-                <span className="label">{horse.Pedigree.mother}</span>
+              <div className="table-col">
+                <div className="table-cell">
+                  <span className="label">{horse.Pedigree.fathersFather}</span>
+                </div>
+                <div className="table-cell">
+                  <span className="label">{horse.Pedigree.fathersMother}</span>
+                </div>
+                <div className="table-cell">
+                  <span className="label">{horse.Pedigree.mothersFather}</span>
+                </div>
+                <div className="table-cell">
+                  <span className="label">{horse.Pedigree.mothersMother}</span>
+                </div>
               </div>
-            </div>
-            <div className="table-col">
-              <div className="table-cell">
-                <span className="label">{horse.Pedigree.fathersFather}</span>
-              </div>
-              <div className="table-cell">
-                <span className="label">{horse.Pedigree.fathersMother}</span>
-              </div>
-              <div className="table-cell">
-                <span className="label">{horse.Pedigree.mothersFather}</span>
-              </div>
-              <div className="table-cell">
-                <span className="label">{horse.Pedigree.mothersMother}</span>
-              </div>
-            </div>
-            <div className="table-col">
-              <div className="table-cell">
-                <span className="label">{horse.Pedigree.fathersFathersFather}</span>
-              </div>
-              <div className="table-cell">
-                <span className="label">{horse.Pedigree.fathersFathersMother}</span>
-              </div>
-              <div className="table-cell">
-                <span className="label">{horse.Pedigree.fathersMothersFather}</span>
-              </div>
-              <div className="table-cell">
-                <span className="label">{horse.Pedigree.fathersMothersMother}</span>
-              </div>
-              <div className="table-cell">
-                <span className="label">{horse.Pedigree.mothersFathersFather}</span>
-              </div>
-              <div className="table-cell">
-                <span className="label">{horse.Pedigree.mothersFathersMother}</span>
-              </div>
-              <div className="table-cell">
-                <span className="label">{horse.Pedigree.mothersMothersFather}</span>
-              </div>
-              <div className="table-cell">
-                <span className="label">{horse.Pedigree.MothersMothersMother}</span>
+              <div className="table-col">
+                <div className="table-cell">
+                  <span className="label">{horse.Pedigree.fathersFathersFather}</span>
+                </div>
+                <div className="table-cell">
+                  <span className="label">{horse.Pedigree.fathersFathersMother}</span>
+                </div>
+                <div className="table-cell">
+                  <span className="label">{horse.Pedigree.fathersMothersFather}</span>
+                </div>
+                <div className="table-cell">
+                  <span className="label">{horse.Pedigree.fathersMothersMother}</span>
+                </div>
+                <div className="table-cell">
+                  <span className="label">{horse.Pedigree.mothersFathersFather}</span>
+                </div>
+                <div className="table-cell">
+                  <span className="label">{horse.Pedigree.mothersFathersMother}</span>
+                </div>
+                <div className="table-cell">
+                  <span className="label">{horse.Pedigree.mothersMothersFather}</span>
+                </div>
+                <div className="table-cell">
+                  <span className="label">{horse.Pedigree.MothersMothersMother}</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
+      {youtube && (
+        <div className="video">
+          <iframe
+            title="main video"
+            id="ytplayer"
+            type="text/html"
+            width="640"
+            height="360"
+            src={youtube}
+            frameBorder="0"
+          ></iframe>
+        </div>
+      )}
       <Link to={getLangPath(`/horses`, lang)} className="btn-tertiary">
         {lang === 'PL' ? 'Zobacz wszystkie konie' : 'See all horses'}
       </Link>
