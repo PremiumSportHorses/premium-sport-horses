@@ -30,6 +30,22 @@ export const query = graphql`
           }
         }
       }
+      Pedigree {
+        MothersMothersMother
+        father
+        mother
+        fathersFather
+        fathersFathersMother
+        fathersFathersFather
+        fathersMother
+        fathersMothersFather
+        fathersMothersMother
+        mothersFather
+        mothersFathersFather
+        mothersFathersMother
+        mothersMother
+        mothersMothersFather
+      }
     }
   }
 `;
@@ -83,6 +99,66 @@ const Horse = ({ data, pageContext, path }) => {
             <div className="table-cell">
               <span className="label">{lang === 'PL' ? 'Cena' : 'Price'}: </span>
               <span className="value">{horsePrices[horse.price]}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="pedigree-wrapper">
+        <h3 className="sectionTitle">{lang === 'PL' ? 'Rodowód' : 'Pedigree'}</h3>
+        <div className="pedigree">
+          <div className="table table-pedigree">
+            <div className="table-col">
+              <div className="table-cell">
+                <span className="label">{horse.name} </span>
+              </div>
+            </div>
+            <div className="table-col">
+              <div className="table-cell">
+                <span className="label">{horse.Pedigree.father}</span>
+              </div>
+              <div className="table-cell">
+                <span className="label">{horse.Pedigree.mother}</span>
+              </div>
+            </div>
+            <div className="table-col">
+              <div className="table-cell">
+                <span className="label">{horse.Pedigree.fathersFather}</span>
+              </div>
+              <div className="table-cell">
+                <span className="label">{horse.Pedigree.fathersMother}</span>
+              </div>
+              <div className="table-cell">
+                <span className="label">{horse.Pedigree.mothersFather}</span>
+              </div>
+              <div className="table-cell">
+                <span className="label">{horse.Pedigree.mothersMother}</span>
+              </div>
+            </div>
+            <div className="table-col">
+              <div className="table-cell">
+                <span className="label">{horse.Pedigree.fathersFathersFather}</span>
+              </div>
+              <div className="table-cell">
+                <span className="label">{horse.Pedigree.fathersFathersMother}</span>
+              </div>
+              <div className="table-cell">
+                <span className="label">{horse.Pedigree.fathersMothersFather}</span>
+              </div>
+              <div className="table-cell">
+                <span className="label">{horse.Pedigree.fathersMothersMother}</span>
+              </div>
+              <div className="table-cell">
+                <span className="label">{horse.Pedigree.mothersFathersFather}</span>
+              </div>
+              <div className="table-cell">
+                <span className="label">{horse.Pedigree.mothersFathersMother}</span>
+              </div>
+              <div className="table-cell">
+                <span className="label">{horse.Pedigree.mothersMothersFather}</span>
+              </div>
+              <div className="table-cell">
+                <span className="label">{horse.Pedigree.MothersMothersMother}</span>
+              </div>
             </div>
           </div>
         </div>

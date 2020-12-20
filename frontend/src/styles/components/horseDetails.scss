@@ -13,3 +13,56 @@
     }
   }
 }
+
+.pedigree-wrapper {
+  margin: 40px auto;
+
+  .pedigree {
+    max-width: 100%;
+    overflow-x: scroll;
+
+    @include mediaFrom($tablet) {
+      max-width: $maxContentNarrow;
+      overflow-x: initial;
+    }
+  }
+
+  .table-pedigree {
+    display: flex;
+    min-width: 600px;
+  }
+
+  .table-col {
+    border-right: 1px solid $beige;
+    display: flex;
+    flex-direction: column;
+    flex-basis: 0;
+    flex-grow: 1;
+
+    &:last-of-type {
+      border-right: 0;
+    }
+  }
+
+  .table-cell {
+    padding: 10px;
+    border-right: 0;
+    border-bottom: 1px solid $beige;
+    flex-basis: 0;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+
+    &:last-of-type {
+      border-bottom: 0;
+    }
+
+    @include mediaFrom($tablet) {
+      padding-left: 20px;
+    }
+  }
+
+  .label {
+    text-transform: none;
+  }
+}
