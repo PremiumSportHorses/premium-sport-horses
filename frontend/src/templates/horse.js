@@ -188,7 +188,7 @@ const Horse = ({ data, pageContext, path }) => {
             title="main video"
             id="ytplayer"
             type="text/html"
-            width={windowSize.width < maxVideoWidth ? windowSize.width - 47 : maxVideoWidth}
+            width={windowSize.width < maxVideoWidth ? windowSize.width - 30 : maxVideoWidth}
             height={windowSize.width < maxVideoWidth ? windowSize.width * 0.6 : maxVideoWidth * 0.6}
             src={youtube}
             frameBorder="0"
