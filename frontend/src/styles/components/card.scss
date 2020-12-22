@@ -30,6 +30,10 @@
     flex-grow: 1;
     padding: 0 10px;
 
+    @include mediaFrom($tablet) {
+      width: 50%;
+    }
+
     @include mediaFrom($desktop) {
       padding: 0 20px;
     }
@@ -49,7 +53,7 @@
     font-weight: 400;
     font-size: 12px;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-align: center;

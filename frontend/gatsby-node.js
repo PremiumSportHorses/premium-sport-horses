@@ -3,7 +3,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const result = await graphql(
     `
       {
-        horses: allStrapiHorse{
+        horses: allStrapiHorse(filter: { isHidden: { eq: false } }) {
           edges {
             node {
               strapiId
@@ -21,7 +21,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   // Create horses pages.
   const horses = result.data.horses.edges;
-  const HorseTemplate = require.resolve("./src/templates/horse.js");
+  const HorseTemplate = require.resolve('./src/templates/horse.js');
 
   horses.forEach((horse) => {
     createPage({
@@ -29,7 +29,7 @@ exports.createPages = async ({ graphql, actions }) => {
       component: HorseTemplate,
       context: {
         slug: horse.node.slug,
-        lang: 'PL'
+        lang: 'PL',
       },
     });
   });
@@ -40,7 +40,7 @@ exports.createPages = async ({ graphql, actions }) => {
       component: HorseTemplate,
       context: {
         slug: horse.node.slug,
-        lang: 'Eng'
+        lang: 'Eng',
       },
     });
   });
@@ -49,19 +49,19 @@ exports.createPages = async ({ graphql, actions }) => {
 module.exports.onCreateNode = async ({ node, actions, createNodeId }) => {
   const crypto = require(`crypto`);
 
-  if (node.internal.type === "StrapiHorse") {
+  if (node.internal.type === 'StrapiHorse') {
     const newNode = {
       id: createNodeId(`StrapiHorseContent-${node.id}`),
       parent: node.id,
       children: [],
       internal: {
-        content: node.content || " ",
-        type: "StrapiHorseContent",
-        mediaType: "text/markdown",
+        content: node.content || ' ',
+        type: 'StrapiHorseContent',
+        mediaType: 'text/markdown',
         contentDigest: crypto
-          .createHash("md5")
-          .update(node.content || " ")
-          .digest("hex"),
+          .createHash('md5')
+          .update(node.content || ' ')
+          .digest('hex'),
       },
     };
     actions.createNode(newNode);
