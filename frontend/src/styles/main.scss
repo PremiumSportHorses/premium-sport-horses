@@ -55,3 +55,11 @@ a {
 .sr-only {
   @include sr-only;
 }
+
+.scrollbar-measure {
+  width: 100px;
+  height: 100px;
+  overflow: scroll;
+  position: absolute;
+  top: -9999px;
+}

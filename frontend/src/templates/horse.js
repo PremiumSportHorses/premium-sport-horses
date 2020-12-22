@@ -8,6 +8,7 @@ import { horsePrices } from '../utils/prices';
 
 import '../styles/components/horseDetails.scss';
 import { useWindowSize } from '../utils/windowSizeHook';
+import { getSrollBarWidth } from '../utils/scrollbar';
 
 export const query = graphql`
   query HorseQuery($slug: String!) {
@@ -63,12 +64,26 @@ const getYoutubeEmbedLink = (link) => {
 
 const maxVideoWidth = 860;
 
+const getVideoSize = (windowSize) => {
+  let width = maxVideoWidth;
+  const scrollBarWidth = getSrollBarWidth();
+
+  if (windowSize.width && windowSize.width < 768) {
+    width = windowSize.width - 30 - scrollBarWidth;
+  } else if (windowSize.width && windowSize.width < 925) {
+    width = windowSize.width - 50 - scrollBarWidth;
+  }
+
+  return { width, height: width * 0.6 };
+};
+
 const Horse = ({ data, pageContext, path }) => {
   const { lang } = pageContext;
   const horse = data.strapiHorse;
   const youtube = getYoutubeEmbedLink(horse.youtubeLink);
 
   const windowSize = useWindowSize();
+  const videoSize = getVideoSize(windowSize);
 
   return (
     <Layout lang={lang} path={path}>
@@ -188,8 +203,8 @@ const Horse = ({ data, pageContext, path }) => {
             title="main video"
             id="ytplayer"
             type="text/html"
-            width={windowSize.width < maxVideoWidth ? windowSize.width - 30 : maxVideoWidth}
-            height={windowSize.width < maxVideoWidth ? windowSize.width * 0.6 : maxVideoWidth * 0.6}
+            width={videoSize.width}
+            height={videoSize.height}
             src={youtube}
             frameBorder="0"
           ></iframe>
