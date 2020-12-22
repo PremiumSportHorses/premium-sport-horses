@@ -113,7 +113,7 @@ const HorsesPage = (props) => {
 
 const query = graphql`
   query {
-    allStrapiHorse {
+    allStrapiHorse(filter: { isHidden: { eq: false } }) {
       nodes {
         description_langEng
         description_langPL

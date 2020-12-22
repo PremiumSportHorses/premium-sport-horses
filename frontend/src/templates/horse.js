@@ -13,6 +13,7 @@ import { getSrollBarWidth } from '../utils/scrollbar';
 export const query = graphql`
   query HorseQuery($slug: String!) {
     strapiHorse(name: { eq: $slug }) {
+      isSold
       name
       description_langPL
       description_langEng
