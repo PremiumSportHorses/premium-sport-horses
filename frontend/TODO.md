@@ -8,4 +8,5 @@
 - hodowla
 - kontakt
 
-- sprzedane konie + ukryj
+- sprzedane konie
+- ukryj - DONE
