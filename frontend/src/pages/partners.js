@@ -16,15 +16,8 @@ const PartnersPage = (props) => {
         <span>{data[`Title_lang${lang}`]}</span>
       </h1>
       <p className="pageDescription">{data[`Description_lang${lang}`]}</p>
-      <div className="pageImage">
-        <Img fluid={data.Image.childImageSharp.fluid} />
-      </div>
-      <p className="pageDescription">{data[`Paragraph2_lang${lang}`]}</p>
-      <h2 className="pageTitle">
-        <span>{data[`Title2_lang${lang}`]}</span>
-      </h2>
-      <p className="pageDescription">{data[`Paragraph3_lang${lang}`]}</p>
-      {data.ImageWithText.map((item) => (
+
+      {data.Partners?.map((item) => (
         <ImageWithText key={item.id} item={item} lang={lang} />
       ))}
     </Layout>
@@ -34,8 +27,23 @@ const PartnersPage = (props) => {
 const query = graphql`
   query {
     strapiOurPartners {
+      Description_langEng
+      Description_langPL
       Title_langEng
       Title_langPL
+      Partners {
+        Description_langEng
+        Description_langPL
+        Variant
+        id
+        Image {
+          childImageSharp {
+            fluid(maxWidth: 600) {
+              ...GatsbyImageSharpFluid_noBase64
+            }
+          }
+        }
+      }
     }
   }
 `;
