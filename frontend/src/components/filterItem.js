@@ -1,11 +1,11 @@
 import React from 'react';
 
-const FilterItem = ({ value, label, setActiveFilter, activeValue, className = '' }) => {
+const FilterItem = ({ value, label, setActivePriceFilter, activeValue, className = '' }) => {
   return (
     <span
       className={`${className} filterItem${value === activeValue ? ' active' : ''}`}
       onClick={() => {
-        setActiveFilter(value);
+        setActivePriceFilter(value);
       }}
     >
       {label}

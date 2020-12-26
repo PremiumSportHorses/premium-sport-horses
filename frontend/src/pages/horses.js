@@ -1,19 +1,44 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
+import { navigate } from '@reach/router';
 import Layout from '../components/layout';
 import Card from '../components/card';
+import FilterItem from '../components/filterItem';
+import Checkbox from '../components/checkbox';
 
 import '../styles/components/horsesList.scss';
-import FilterItem from '../components/filterItem';
 
 const HorsesPage = (props) => {
   const data = useStaticQuery(query).allStrapiHorse;
   const lang = props.lang || 'Eng';
   const { path } = props;
 
-  const [activeFilter, setActiveFilter] = useState('showAll');
+  const [activePriceFilter, setActivePriceFilter] = useState('showAll');
+  const [showSold, setShowSold] = useState(true);
+  const [showAvailable, setShowAvailable] = useState(true);
 
-  const horses = data.nodes.filter((horse) => activeFilter === 'showAll' || activeFilter === horse.price);
+  const horses = data.nodes.filter(
+    (horse) =>
+      (activePriceFilter === 'showAll' || activePriceFilter === horse.price) &&
+      (showSold === true || horse.isSold === false) &&
+      (showAvailable === true || horse.isSold === true)
+  );
+
+  const setActivePriceFilterHandler = (value) => {
+    const params = new URLSearchParams(props.location.search);
+    params.set('price', value);
+    navigate(props.location.pathname + '?' + params.toString());
+    setActivePriceFilter(value);
+  };
+
+  useEffect(() => {
+    const price = new URLSearchParams(props.location.search).get('price');
+
+    if (price) {
+      setActivePriceFilter(price);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Layout lang={lang} path={path}>
@@ -26,46 +51,62 @@ const HorsesPage = (props) => {
         arcu nec euismod. Donec ullamcorper quam eu erat interdum dapibus. Vivamus eleifend dui at tristique tristique.
         Suspendisse massa felis, malesuada non magna vel, varius aliquam purus.
       </p>
-      <div className="filters">
-        <h2 className="label">
-          <span>{lang === 'PL' ? 'Przedziały cenowe:' : 'Price Ranges:'}</span>
-        </h2>
-        <div className="prices">
-          <FilterItem
-            value="showAll"
-            label={lang === 'PL' ? 'wszystkie' : 'all prices'}
-            activeValue={activeFilter}
-            setActiveFilter={setActiveFilter}
+      <div className="filtersWrapper">
+        <div className="filters">
+          <h2 className="label">
+            <span>{lang === 'PL' ? 'Przedziały cenowe:' : 'Price Ranges:'}</span>
+          </h2>
+          <div className="prices">
+            <FilterItem
+              value="showAll"
+              label={lang === 'PL' ? 'wszystkie' : 'all prices'}
+              activeValue={activePriceFilter}
+              setActivePriceFilter={setActivePriceFilterHandler}
+            />
+            <FilterItem
+              value="OneStar"
+              label={`* ${lang === 'PL' ? 'poniżej' : 'below'} 15 000 EUR`}
+              activeValue={activePriceFilter}
+              setActivePriceFilter={setActivePriceFilterHandler}
+            />
+            <FilterItem
+              value="TwoStars"
+              label="** 15 000 EUR - 25 000 EUR"
+              activeValue={activePriceFilter}
+              setActivePriceFilter={setActivePriceFilterHandler}
+            />
+            <FilterItem
+              value="ThreeStars"
+              label="*** 25 000 EUR - 40 000 EUR"
+              activeValue={activePriceFilter}
+              setActivePriceFilter={setActivePriceFilterHandler}
+            />
+            <FilterItem
+              value="FourStars"
+              label="**** 40 000 EUR - 60 000 EUR"
+              activeValue={activePriceFilter}
+              setActivePriceFilter={setActivePriceFilterHandler}
+            />
+            <FilterItem
+              value="FiveStars"
+              label={`***** ${lang === 'PL' ? 'powyżej' : 'above'} 60 000 EUR`}
+              activeValue={activePriceFilter}
+              setActivePriceFilter={setActivePriceFilterHandler}
+            />
+          </div>
+        </div>
+        <div className="filters availability">
+          <Checkbox
+            location={props.location}
+            id="showAvailable"
+            label={lang === 'PL' ? 'dostępne w sprzedaży' : 'Show available'}
+            callback={setShowAvailable}
           />
-          <FilterItem
-            value="OneStar"
-            label={`* ${lang === 'PL' ? 'poniżej' : 'below'} 15 000 EUR`}
-            activeValue={activeFilter}
-            setActiveFilter={setActiveFilter}
-          />
-          <FilterItem
-            value="TwoStars"
-            label="** 15 000 EUR - 25 000 EUR"
-            activeValue={activeFilter}
-            setActiveFilter={setActiveFilter}
-          />
-          <FilterItem
-            value="ThreeStars"
-            label="*** 25 000 EUR - 40 000 EUR"
-            activeValue={activeFilter}
-            setActiveFilter={setActiveFilter}
-          />
-          <FilterItem
-            value="FourStars"
-            label="**** 40 000 EUR - 60 000 EUR"
-            activeValue={activeFilter}
-            setActiveFilter={setActiveFilter}
-          />
-          <FilterItem
-            value="FiveStars"
-            label={`***** ${lang === 'PL' ? 'powyżej' : 'above'} 60 000 EUR`}
-            activeValue={activeFilter}
-            setActiveFilter={setActiveFilter}
+          <Checkbox
+            location={props.location}
+            id="showSold"
+            label={lang === 'PL' ? 'sprzedane' : 'Show sold'}
+            callback={setShowSold}
           />
         </div>
       </div>
@@ -80,8 +121,8 @@ const HorsesPage = (props) => {
                   className="btn-tertiary"
                   value="showAll"
                   label="pokaz wszystkie przedziały cenowe"
-                  activeValue={activeFilter}
-                  setActiveFilter={setActiveFilter}
+                  activeValue={activePriceFilter}
+                  setActivePriceFilter={setActivePriceFilterHandler}
                 />
               </p>
             </div>
@@ -94,8 +135,8 @@ const HorsesPage = (props) => {
                   className="btn-tertiary"
                   value="showAll"
                   label="view all prices"
-                  activeValue={activeFilter}
-                  setActiveFilter={setActiveFilter}
+                  activeValue={activePriceFilter}
+                  setActivePriceFilter={setActivePriceFilterHandler}
                 />
               </p>
             </div>
@@ -124,6 +165,7 @@ const query = graphql`
         height
         gender
         level
+        isSold
         mainImage {
           publicURL
           childImageSharp {

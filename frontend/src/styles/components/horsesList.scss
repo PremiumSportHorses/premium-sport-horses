@@ -1,16 +1,56 @@
 @import '../utils';
 
-.filters {
+.filtersWrapper {
+  max-width: $maxContentNarrow;
+  margin: 0 auto;
+  margin-bottom: 30px;
   text-align: center;
+
+  @include mediaFrom($tablet) {
+    display: flex;
+    position: relative;
+    text-align: left;
+  }
+
+  .availability {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+
+    @include mediaFrom($tablet) {
+      justify-content: flex-start;
+      position: absolute;
+      right: 0;
+      top: 0;
+      margin: 0;
+      padding: 0;
+    }
+
+    label {
+      position: relative;
+      top: 1px;
+    }
+  }
+}
+
+.filters {
+  .label {
+    padding: 4px 8px 4px 0;
+    font-size: 12px;
+    margin: 5px;
+    font-weight: bold;
+    display: inline-block;
+  }
 }
 
 .prices {
-  margin-bottom: 30px;
-
   @include mediaFrom($tablet) {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: flex-start;
   }
 }
 

@@ -8,12 +8,18 @@ import '../styles/components/card.scss';
 
 const Card = ({ lang, horse }) => {
   return (
-    <div className="card">
+    <div className={`card${horse.isSold ? ' isSold' : ''}`}>
       <div className="card-image">
         <Img fluid={{ ...horse.mainImage.childImageSharp.fluid, aspectRatio: 1.5 }} />
       </div>
       <div className="card-description">
-        <h3 className="card-title">{horse.name}</h3>
+        <h3 className="card-title">
+          <Link to={getLangPath(`/horse/${horse.name}`, lang)}>
+            <span className="horse-name">{horse.name}</span>{' '}
+          </Link>
+          <span className="horse-sold">{lang === 'PL' ? 'Sprzedany' : 'Sold'}</span>
+          <span className="horse-available">{lang === 'PL' ? 'Dostępny' : 'Available'}</span>
+        </h3>
         <h4 className="card-info">{horse[`description_lang${lang}`]}</h4>
 
         <div className="table">

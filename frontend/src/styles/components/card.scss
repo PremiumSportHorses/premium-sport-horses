@@ -44,6 +44,14 @@
     text-align: center;
     margin-bottom: 5px;
 
+    a {
+      text-decoration: none;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+
     @include mediaFrom($tablet) {
       text-align: left;
     }
@@ -71,5 +79,34 @@
 
   .table-cell {
     flex-basis: 50%;
+  }
+
+  .horse-sold,
+  .horse-available {
+    margin: 0 10px;
+    text-transform: none;
+    background-color: $beige;
+    font-size: 12px;
+    padding: 2px 10px;
+    position: relative;
+    top: -3px;
+  }
+
+  .horse-sold {
+    display: none;
+  }
+
+  &.isSold {
+    .horse-name {
+      text-decoration: line-through;
+    }
+
+    .horse-available {
+      display: none;
+    }
+
+    .horse-sold {
+      display: inline-block;
+    }
   }
 }
