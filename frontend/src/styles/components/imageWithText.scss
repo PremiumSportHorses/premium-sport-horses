@@ -1,0 +1,33 @@
+@import '../utils';
+
+.imageWithText {
+  max-width: $maxContent;
+  margin: 40px auto;
+  font-size: 14px;
+
+  @include mediaFrom($tablet) {
+    display: flex;
+    align-items: center;
+
+    .imageWithText-image {
+      width: 50%;
+    }
+
+    .imageWithText-text {
+      width: 50%;
+      padding: 20px 40px;
+    }
+  }
+}
+
+.imageOnTheRight {
+  @include mediaFrom($tablet) {
+    .imageWithText-image {
+      order: 1;
+    }
+
+    .imageWithText-text {
+      text-align: right;
+    }
+  }
+}

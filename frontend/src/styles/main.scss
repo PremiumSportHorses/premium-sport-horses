@@ -63,3 +63,8 @@ a {
   position: absolute;
   top: -9999px;
 }
+
+.pageImage {
+  max-width: $maxContent;
+  margin: 10px auto;
+}

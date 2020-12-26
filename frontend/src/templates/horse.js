@@ -98,7 +98,9 @@ const Horse = ({ data, pageContext, path }) => {
         <Markdown source={horse[`description_lang${lang}`]} escapeHtml={false} />
       </div>
       <div className="horse-keyInformation">
-        <Img fixed={horse.image.childImageSharp.fluid} imgStyle={{ position: 'static' }} />
+        <div className="horse-image">
+          <Img fluid={horse.image.childImageSharp.fluid} />
+        </div>
         <div className="table">
           <div className="table-row">
             <div className="table-cell">
