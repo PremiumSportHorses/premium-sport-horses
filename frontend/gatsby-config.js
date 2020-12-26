@@ -10,6 +10,8 @@ module.exports = {
         implementation: require('sass'),
       },
     },
+    'gatsby-transformer-sharp',
+    'gatsby-plugin-sharp',
     'gatsby-plugin-react-helmet',
     {
       resolve: `gatsby-source-filesystem`,
@@ -19,16 +21,14 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-source-strapi',
+      resolve: 'gatsby-source-strapi-fixed',
       options: {
         apiURL: process.env.API_URL || 'http://localhost:1337',
         contentTypes: ['horse'],
-        singleTypes: [`about-us`, `global-settings`],
+        singleTypes: ['about-us', 'our-partners', 'global-settings'],
         queryLimit: 1000,
       },
     },
-    'gatsby-transformer-sharp',
-    'gatsby-plugin-sharp',
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -38,6 +38,7 @@ module.exports = {
         background_color: '#663399',
         theme_color: '#663399',
         display: 'minimal-ui',
+        icon: `src/images/icon.png`,
       },
     },
     'gatsby-plugin-offline',

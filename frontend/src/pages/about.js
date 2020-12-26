@@ -1,5 +1,4 @@
 import React from 'react';
-import Markdown from 'react-markdown';
 import { graphql, useStaticQuery } from 'gatsby';
 import Img from 'gatsby-image';
 
