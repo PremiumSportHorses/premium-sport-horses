@@ -214,9 +214,11 @@ const Horse = ({ data, pageContext, path }) => {
           ></iframe>
         </div>
       )}
-      <Link to={getLangPath(`/horses`, lang)} className="btn-tertiary">
-        {lang === 'PL' ? 'Zobacz wszystkie konie' : 'See all horses'}
-      </Link>
+      <div className="action-items">
+        <Link to={getLangPath(`/horses`, lang)} className="btn-tertiary">
+          {lang === 'PL' ? 'Zobacz wszystkie konie' : 'See all horses'}
+        </Link>
+      </div>
     </Layout>
   );
 };
