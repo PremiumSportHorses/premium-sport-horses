@@ -5,11 +5,12 @@
 
 - homepage
 - o nas - DONE
-- partners
+- partners - DONE
 - treningi
 - rekreacja
 - hodowla
 - kontakt
+- horses list - strapi
 
 - sprzedane konie - DONE
 - ukryj - DONE

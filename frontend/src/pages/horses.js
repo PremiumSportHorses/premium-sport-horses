@@ -14,14 +14,12 @@ const HorsesPage = (props) => {
   const { path } = props;
 
   const [activePriceFilter, setActivePriceFilter] = useState('showAll');
-  const [showSold, setShowSold] = useState(true);
-  const [showAvailable, setShowAvailable] = useState(true);
+  const [hideSold, setHideSold] = useState(false);
 
   const horses = data.nodes.filter(
     (horse) =>
       (activePriceFilter === 'showAll' || activePriceFilter === horse.price) &&
-      (showSold === true || horse.isSold === false) &&
-      (showAvailable === true || horse.isSold === true)
+      ((hideSold === true && horse.isSold === false) || hideSold === false)
   );
 
   const setActivePriceFilterHandler = (value) => {
@@ -98,15 +96,9 @@ const HorsesPage = (props) => {
         <div className="filters availability">
           <Checkbox
             location={props.location}
-            id="showAvailable"
-            label={lang === 'PL' ? 'dostępne w sprzedaży' : 'Show available'}
-            callback={setShowAvailable}
-          />
-          <Checkbox
-            location={props.location}
-            id="showSold"
-            label={lang === 'PL' ? 'sprzedane' : 'Show sold'}
-            callback={setShowSold}
+            id="hideSold"
+            label={lang === 'PL' ? 'ukryj sprzedane' : 'Hide sold'}
+            callback={setHideSold}
           />
         </div>
       </div>

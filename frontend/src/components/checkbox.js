@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { navigate } from '@reach/router';
 
 const Checkbox = ({ id, label, callback, history, location }) => {
-  const [isChecked, setIsChecked] = useState(true);
+  const [isChecked, setIsChecked] = useState(false);
 
   const onChangeHandler = () => {
     const params = new URLSearchParams(location.search);
@@ -15,9 +15,9 @@ const Checkbox = ({ id, label, callback, history, location }) => {
   useEffect(() => {
     const params = new URLSearchParams(location.search);
 
-    if (params.get(id) === 'false') {
-      setIsChecked(false);
-      callback(false);
+    if (params.get(id) === 'true') {
+      setIsChecked(true);
+      callback(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
