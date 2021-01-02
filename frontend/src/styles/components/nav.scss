@@ -34,6 +34,10 @@
       padding-right: $offsetTablet;
     }
 
+    @include mediaFrom($desktop) {
+      padding-top: 0;
+    }
+
     a {
       display: flex;
       align-items: center;
@@ -92,6 +96,7 @@
       width: auto;
       height: auto;
       padding-left: 0;
+      padding-top: 10px;
     }
   }
 
@@ -264,7 +269,10 @@
     }
 
     .flag {
-      margin-right: 10px;
+      margin-right: 8px;
+      font-size: 14px;
+      position: relative;
+      top: 2px;
     }
   }
 
