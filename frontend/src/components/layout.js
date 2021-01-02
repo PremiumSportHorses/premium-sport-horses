@@ -1,41 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { StaticQuery, graphql } from 'gatsby';
 import Nav from './nav';
 import Seo from './seo';
-// import Seo from "./seo";
-import '../styles/main.scss';
 
-// const Layout = ({ children, seo }) => (
-//   <StaticQuery
-//     query={graphql`
-//       query {
-//         strapiHomepage {
-//           seo {
-//             metaTitle
-//             metaDescription
-//             shareImage {
-//               publicURL
-//             }
-//           }
-//         }
-//       }
-//     `}
-//     render={(data) => (
-//       <>
-//         <Seo seo={seo} />
-//         <Nav />
-//         <main>{children}</main>
-//       </>
-//     )}
-//   />
-// );
+import '../styles/main.scss';
+import '../styles/components/layout.scss';
 
 const Layout = ({ children, lang, path }) => (
   <>
     <Seo />
     <Nav lang={lang} path={path} />
     <main className="main">{children}</main>
+    <footer className="pageFooter">
+      <div className="pageFooter-content">
+        <p>© Premium Sport Horses, 2020</p>
+      </div>
+    </footer>
   </>
 );
 

@@ -22,6 +22,7 @@ body {
   margin: 0 auto;
   padding-left: $offset;
   padding-right: $offset;
+  min-height: 78vh;
 
   @include mediaFrom($tablet) {
     padding-left: $offsetTablet;

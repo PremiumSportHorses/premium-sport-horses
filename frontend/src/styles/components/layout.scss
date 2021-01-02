@@ -1,0 +1,22 @@
+@import '../utils.scss';
+
+.pageFooter {
+  background-color: $darkBlue;
+  color: $white;
+  padding: 20px 0;
+
+  &-content {
+    max-width: $maxContent;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 12px;
+    padding-left: $offset;
+    padding-right: $offset;
+
+    @include mediaFrom($tablet) {
+      padding-left: $offsetTablet;
+      padding-right: $offsetTablet;
+      text-align: right;
+    }
+  }
+}
