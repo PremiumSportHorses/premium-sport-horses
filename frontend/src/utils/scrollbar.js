@@ -5,6 +5,10 @@ export const getSrollBarWidth = () => {
     return scrollBarWidth;
   }
 
+  if (typeof window === 'undefined' || !window.document) {
+    return 0;
+  }
+
   const scrollDiv = document.createElement('div');
   scrollDiv.className = 'scrollbar-measure';
   document.body.appendChild(scrollDiv);
