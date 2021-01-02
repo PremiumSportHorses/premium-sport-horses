@@ -23,7 +23,7 @@ module.exports = {
     {
       resolve: 'gatsby-source-strapi',
       options: {
-        apiURL: process.env.API_URL || 'http://localhost:1337',
+        apiURL: process.env.API_URL || 'https://premium-sport-horses.herokuapp.com',
         contentTypes: ['horse'],
         singleTypes: ['about-us', 'our-partners', 'global-settings'],
         queryLimit: 1000,
