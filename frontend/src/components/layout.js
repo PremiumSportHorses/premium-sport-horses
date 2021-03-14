@@ -13,7 +13,7 @@ const Layout = ({ children, lang, path }) => (
     <main className="main">{children}</main>
     <footer className="pageFooter">
       <div className="pageFooter-content">
-        <p>© Premium Sport Horses, 2020</p>
+        <p>© Premium Sport Horses, 2021</p>
       </div>
     </footer>
   </>
