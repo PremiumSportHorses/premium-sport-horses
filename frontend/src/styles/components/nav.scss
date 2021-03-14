@@ -26,7 +26,7 @@
   }
 
   .logo {
-    padding: 10px $offset 5px;
+    padding: 10px $offset 3px;
     display: inline-block;
 
     @include mediaFrom($tablet) {
@@ -60,10 +60,6 @@
 
   .mainNav {
     flex-grow: 1;
-
-    @include mediaFrom($desktop) {
-      max-width: 840px;
-    }
 
     @include mediaFrom($desktopXL) {
       margin-left: 30px;

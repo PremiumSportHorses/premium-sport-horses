@@ -1,28 +1,40 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import Layout from '../components/layout';
+import TitleParImagePar from '../components/titleParImagePar';
 
 const TrainingsPage = (props) => {
-  const data = useStaticQuery(query).strapiAboutUs;
+  const data = useStaticQuery(query).strapiTrainings;
   const lang = props.lang || 'Eng';
   const { path } = props;
 
   return (
     <Layout lang={lang} path={path}>
-      <h1 className="pageTitle">
-        <span>{lang === 'PL' ? 'Treningi Sportowe' : 'Trainings'}</span>
-      </h1>
-      {/* <p className="pageDescription">{data[`Description_lang${lang}`]}</p> */}
-      <p className="pageDescription">{lang === 'PL' ? 'Do zrobienia' : 'To Do'}</p>
+      {data.Section?.map((section) => (
+        <TitleParImagePar item={section} lang={lang} />
+      ))}
     </Layout>
   );
 };
 
 const query = graphql`
   query {
-    strapiAboutUs {
-      Description_langEng
-      Description_langPL
+    strapiTrainings {
+      Section {
+        Paragraph1_langEng
+        Paragraph1_langPL
+        Paragraph2_langEng
+        Paragraph2_langPL
+        Title_langEng
+        Title_langPL
+        Image {
+          childImageSharp {
+            fluid(maxWidth: 1240) {
+              ...GatsbyImageSharpFluid_noBase64
+            }
+          }
+        }
+      }
     }
   }
 `;
