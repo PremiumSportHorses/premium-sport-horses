@@ -37,7 +37,7 @@ a {
 *:focus {
   /* Provide a fallback style for browsers
      that don't support :focus-visible */
-  outline-color: #3f68ea;
+  outline-color: $focusColor;
 }
 
 *:focus:not(:focus-visible) {
@@ -50,7 +50,7 @@ a {
   /* Draw a very noticeable focus style for
      keyboard-focus on browsers that do support
      :focus-visible */
-  outline-color: #3f68ea;
+  outline-color: $focusColor;
 }
 
 .sr-only {
