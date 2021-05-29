@@ -268,7 +268,13 @@
       margin-right: 8px;
       font-size: 14px;
       position: relative;
-      top: 2px;
+      top: 4px;
+      width: 27px;
+      display: inline-block;
+
+      svg {
+        height: 20px;
+      }
     }
   }
 
