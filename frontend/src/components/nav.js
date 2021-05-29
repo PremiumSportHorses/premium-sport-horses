@@ -7,6 +7,7 @@ import Img from 'gatsby-image';
 import '../styles/components/nav.scss';
 import FacebookIcon from './icons/facebookIcon';
 import PolishFlag from './icons/polishFlag';
+import GreatBritainFlag from './icons/greatBritainFlag';
 
 // const Nav = () => (
 //   <StaticQuery
@@ -104,7 +105,7 @@ const Nav = ({ lang, path }) => {
               {lang === 'PL' ? (
                 <Link to={getLangPath(path, 'Eng')}>
                   <span className="flag" role="img" aria-label="UK Flag">
-                    🇬🇧
+                    <GreatBritainFlag />
                   </span>
                   English
                 </Link>
