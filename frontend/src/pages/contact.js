@@ -12,8 +12,17 @@ const ContactPage = (props) => {
       <h1 className="pageTitle">
         <span>{lang === 'PL' ? 'Kontakt' : 'Contact'}</span>
       </h1>
-      {/* <p className="pageDescription">{data[`Description_lang${lang}`]}</p> */}
-      <p className="pageDescription">{lang === 'PL' ? 'Do zrobienia' : 'To Do'}</p>
+      <div className="pageSection">
+        <address className="contactAddress">
+          <span className="bold">Jan Żmójdzin</span>
+          <span>tel. <a href="tel:000000000">000 000 000</a></span>
+          <span>email: <a href="mailto:janzmojdzin@gmail.com">janzmojdzin@gmail.com</a></span>
+        </address>
+        <address className="contactAddress">
+          <span className="bold">Justyna Żmójdzin</span>
+          <span>tel. <a href="tel:000000000">000 000 000</a></span>
+        </address>
+      </div>
     </Layout>
   );
 };
