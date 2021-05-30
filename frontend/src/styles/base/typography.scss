@@ -69,3 +69,26 @@
     opacity: 0.8;
   }
 }
+
+.bold {
+  font-weight: bold;
+}
+
+.contactAddress {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-style: normal;
+  
+  span {
+    display: block;
+  }
+
+  a {
+    text-decoration: none;
+
+    // &:hover {
+    //  font-weight: bold;
+    // }
+  }
+}
