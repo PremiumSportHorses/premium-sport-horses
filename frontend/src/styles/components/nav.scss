@@ -236,6 +236,7 @@
     svg {
       height: 20px;
       margin-right: 10px;
+      display: block;
 
       @include mediaFrom($tablet) {
         height: 16px;
@@ -255,20 +256,24 @@
 
     a {
       background: $darkBlue;
-      display: inline-block;
+      display: flex;
       text-decoration: none;
       padding: 10px 25px 10px 20px;
       width: 100%;
       font-weight: 400;
       line-height: 22px;
       border: 1px solid $darkBlue;
+      justify-content: center;
     }
 
-    .flag {
+    .icon {
       margin-right: 8px;
-      font-size: 14px;
-      position: relative;
-      top: 2px;
+      display: inline-block;
+
+      svg {
+        height: 20px;
+        display: block;
+      }
     }
   }
 

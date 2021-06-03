@@ -5,7 +5,9 @@ import { useStaticQuery, graphql } from 'gatsby';
 import Img from 'gatsby-image';
 
 import '../styles/components/nav.scss';
-import FacebookIcon from './icons/facebook-icon';
+import FacebookIcon from './icons/facebookIcon';
+import PolishFlag from './icons/polishFlag';
+import GreatBritainFlag from './icons/greatBritainFlag';
 
 // const Nav = () => (
 //   <StaticQuery
@@ -102,23 +104,25 @@ const Nav = ({ lang, path }) => {
             <div className="languageSwitcher">
               {lang === 'PL' ? (
                 <Link to={getLangPath(path, 'Eng')}>
-                  <span className="flag" role="img" aria-label="UK Flag">
-                    🇬🇧
+                  <span className="icon" role="img" aria-label="UK Flag">
+                    <GreatBritainFlag />
                   </span>
                   English
                 </Link>
               ) : (
                 <Link to={getLangPath(path, 'PL')}>
-                  <span className="flag" role="img" aria-label="Polish Flag">
-                    🇵🇱
+                  <span className="icon" role="img" aria-label="Polish Flag">
+                    <PolishFlag />
                   </span>
-                  Polski
+                  <span className="text">Polski</span>
                 </Link>
               )}
             </div>
             <div className="social">
               <a target="_blank" href="https://www.facebook.com/premiumsporthorsesjz">
-                <FacebookIcon />
+                <span className="icon" role="img" aria-label="Facebook icon">
+                  <FacebookIcon />
+                </span>
                 <span className="text">Facebook</span>
               </a>
             </div>
