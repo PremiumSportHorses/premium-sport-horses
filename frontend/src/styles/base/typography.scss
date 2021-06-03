@@ -51,6 +51,11 @@
   background-color: transparent;
   border: 1px solid $darkBlue;
   border-radius: 3px;
+  transition: ease-in 0.4s opacity;
+
+  &:hover {
+    opacity: 0.8;
+  }
 }
 
 .btn-more {
