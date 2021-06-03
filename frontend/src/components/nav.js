@@ -104,14 +104,14 @@ const Nav = ({ lang, path }) => {
             <div className="languageSwitcher">
               {lang === 'PL' ? (
                 <Link to={getLangPath(path, 'Eng')}>
-                  <span className="flag" role="img" aria-label="UK Flag">
+                  <span className="icon" role="img" aria-label="UK Flag">
                     <GreatBritainFlag />
                   </span>
                   English
                 </Link>
               ) : (
                 <Link to={getLangPath(path, 'PL')}>
-                  <span className="flag" role="img" aria-label="Polish Flag">
+                  <span className="icon" role="img" aria-label="Polish Flag">
                     <PolishFlag />
                   </span>
                   <span className="text">Polski</span>
@@ -120,7 +120,9 @@ const Nav = ({ lang, path }) => {
             </div>
             <div className="social">
               <a target="_blank" href="https://www.facebook.com/premiumsporthorsesjz">
-                <FacebookIcon />
+                <span className="icon" role="img" aria-label="Facebook icon">
+                  <FacebookIcon />
+                </span>
                 <span className="text">Facebook</span>
               </a>
             </div>
