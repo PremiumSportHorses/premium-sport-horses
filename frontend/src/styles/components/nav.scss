@@ -43,6 +43,11 @@
       align-items: center;
       text-decoration: none;
       color: $darkBlue;
+      transition: ease-in 0.4s opacity;
+
+      &:hover {
+        opacity: 0.8;
+      }
     }
   }
 
