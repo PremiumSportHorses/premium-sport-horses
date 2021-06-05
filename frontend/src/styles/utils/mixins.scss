@@ -8,6 +8,13 @@
   clip: rect(0, 0, 0, 0);
   border: 0;
 }
+@mixin defaultHover {
+  transition: ease-in 0.4s opacity;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
 
 @mixin addSkewEffect($height: 24px, $color: $beige) {
   background: $color;

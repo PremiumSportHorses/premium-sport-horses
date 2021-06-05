@@ -51,10 +51,13 @@
   background-color: transparent;
   border: 1px solid $darkBlue;
   border-radius: 3px;
+  
+  @include defaultHover;
 }
 
 .btn-more {
   @include addSkewEffect(30px, $darkBlue);
+  @include defaultHover;
 
   line-height: 31px;
   padding: 0 40px;
@@ -64,11 +67,6 @@
   color: $white;
   background-color: $darkBlue;
   text-transform: uppercase;
-  transition: opacity 0.3s ease-in-out;
-
-  &:hover {
-    opacity: 0.8;
-  }
 }
 
 .bold {
