@@ -56,10 +56,9 @@
 }
 
 .btn-more {
-  @include addSkewEffect(30px, $darkBlue);
+  @include addSkewEffect(29px, $darkBlue);
   @include defaultHover;
 
-  line-height: 31px;
   padding: 0 40px;
   display: inline-block;
   text-align: left;
