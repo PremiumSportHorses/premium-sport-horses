@@ -8,7 +8,7 @@
   clip: rect(0, 0, 0, 0);
   border: 0;
 }
-@mixin default-hover {
+@mixin defaultHover {
   transition: ease-in 0.4s opacity;
 
   &:hover {

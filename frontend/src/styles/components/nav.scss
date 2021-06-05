@@ -44,7 +44,7 @@
       text-decoration: none;
       color: $darkBlue;
 
-      @include default-hover;
+      @include defaultHover;
     }
   }
 
@@ -234,7 +234,7 @@
       justify-content: center;
       line-height: 22px;
 
-      @include default-hover;
+      @include defaultHover;
     }
 
     svg {
@@ -269,7 +269,7 @@
       border: 1px solid $darkBlue;
       justify-content: center;
       
-      @include default-hover;
+      @include defaultHover;
     }
 
     .icon {
