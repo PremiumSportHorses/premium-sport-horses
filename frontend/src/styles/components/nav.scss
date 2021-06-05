@@ -43,11 +43,8 @@
       align-items: center;
       text-decoration: none;
       color: $darkBlue;
-      transition: ease-in 0.4s opacity;
 
-      &:hover {
-        opacity: 0.8;
-      }
+      @include default-hover;
     }
   }
 
@@ -236,13 +233,9 @@
       width: 100%;
       justify-content: center;
       line-height: 22px;
-      transition: ease-in 0.4s opacity;
 
-      &:hover {
-        opacity: 0.8;
-      }
+      @include default-hover;
     }
-    
 
     svg {
       height: 20px;
@@ -275,11 +268,8 @@
       line-height: 22px;
       border: 1px solid $darkBlue;
       justify-content: center;
-      transition: ease-in 0.4s opacity;
-
-      &:hover {
-        opacity: 0.8;
-      }
+      
+      @include default-hover;
     }
 
     .icon {
