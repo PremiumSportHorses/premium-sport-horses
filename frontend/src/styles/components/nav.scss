@@ -43,6 +43,8 @@
       align-items: center;
       text-decoration: none;
       color: $darkBlue;
+
+      @include defaultHover;
     }
   }
 
@@ -231,6 +233,8 @@
       width: 100%;
       justify-content: center;
       line-height: 22px;
+
+      @include defaultHover;
     }
 
     svg {
@@ -264,6 +268,8 @@
       line-height: 22px;
       border: 1px solid $darkBlue;
       justify-content: center;
+      
+      @include defaultHover;
     }
 
     .icon {
