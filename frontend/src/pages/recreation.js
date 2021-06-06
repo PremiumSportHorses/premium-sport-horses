@@ -21,7 +21,9 @@ const RecreationPage = (props) => {
           <Img fluid={data.FullWidthImage.childImageSharp.fluid} />
         </div>
       )}
-      <p className="pageDescription">{lang === 'PL' ? data.SecondDescription_langPL : SecondDescription_langEng}</p>
+      <p className="pageDescription">
+        {lang === 'PL' ? data.SecondDescription_langPL : data.SecondDescription_langEng}
+      </p>
       <h2 className="pageTitle">
         <span>{lang === 'PL' ? data.SecondTitle_langPL : data.SecondTitle_langEng}</span>
       </h2>
