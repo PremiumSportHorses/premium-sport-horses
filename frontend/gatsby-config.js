@@ -25,7 +25,7 @@ module.exports = {
       options: {
         apiURL: process.env.API_URL || 'https://premium-sport-horses.herokuapp.com',
         contentTypes: ['horse'],
-        singleTypes: ['about-us', 'our-partners', 'global-settings', 'trainings', 'recreation'],
+        singleTypes: ['about-us', 'our-partners', 'global-settings', 'trainings', 'recreation', 'contact'],
         queryLimit: 1000,
       },
     },
