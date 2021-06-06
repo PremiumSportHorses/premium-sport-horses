@@ -17,6 +17,8 @@ export const query = graphql`
       age
       breed_langPL
       breed_langEng
+      coat_langEng
+      coat_langPL
       height
       gender
       image: mainImage {
@@ -98,6 +100,12 @@ const BreedingHorse = ({ data, pageContext, path }) => {
             <div className="table-cell">
               <span className="label">{lang === 'PL' ? 'Wzrost' : 'Height'}: </span>
               <span className="value">{horse.height} </span>
+            </div>
+          </div>
+          <div className="table-row">
+            <div className="table-cell">
+              <span className="label">{lang === 'PL' ? 'Maść' : 'Coat'}: </span>
+              <span className="value">{lang === 'PL' ? horse.coat_langPL : horse.coat_langEng} </span>
             </div>
           </div>
           <div className="table-row">
