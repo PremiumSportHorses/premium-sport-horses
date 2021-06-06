@@ -1,18 +1,28 @@
 const PlPrefix = 'pl/';
 
-export const getLangPath = (path, lang) => {
+const cutFirstAndLastSlash = (path) => {
   let langPath = path[path.length - 1] === '/' ? path.slice(0, -1) : path;
   langPath = langPath[0] === '/' ? langPath.slice(1) : langPath;
 
-  if (lang === 'PL' && langPath.indexOf(PlPrefix) < 0) {
-    langPath = `${PlPrefix}${langPath}`;
+  return langPath;
+};
+
+export const getLangPath = (path, lang) => {
+  const cleanedPath = cutFirstAndLastSlash(path);
+
+  if (cleanedPath === 'pl') {
+    return '/';
   }
 
-  if (lang === 'Eng' && langPath.indexOf(PlPrefix) >= 0) {
-    langPath = langPath.replace(PlPrefix, '');
+  if (lang === 'PL' && path.indexOf(PlPrefix) < 0) {
+    return `/${PlPrefix}${cleanedPath}`;
   }
 
-  return `/${langPath}`;
+  if (lang === 'Eng' && path.indexOf(PlPrefix) >= 0) {
+    return `/${cleanedPath.replace(PlPrefix, '')}`;
+  }
+
+  return `/${cleanedPath}`;
 };
 
 const genders = {
