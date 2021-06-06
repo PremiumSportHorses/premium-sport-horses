@@ -1,30 +1,69 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
+import Img from 'gatsby-image';
+
 import Layout from '../components/layout';
+import ImageWithText from '../components/imageWithText';
 
 const RecreationPage = (props) => {
-  const data = useStaticQuery(query).strapiAboutUs;
+  const data = useStaticQuery(query).strapiRecreation;
   const lang = props.lang || 'Eng';
   const { path } = props;
 
   return (
     <Layout lang={lang} path={path}>
       <h1 className="pageTitle">
-        <span>{lang === 'PL' ? 'Rekreacja' : 'Recreation'}</span>
+        <span>{lang === 'PL' ? data.Title_langPL : data.Title_langEng}</span>
       </h1>
-      <p className="pageDescription">{lang === 'PL' ? 'Polski opis tutaj polski polski polski po polsku tutaj' : 'ENG wersja angielska There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn\'t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.'}</p>
+      <p className="pageDescription">{lang === 'PL' ? data.Description_langPL : data.Description_langEng}</p>
+      {data.FullWidthImage && (
+        <div className="pageImage">
+          <Img fluid={data.FullWidthImage.childImageSharp.fluid} />
+        </div>
+      )}
+      <p className="pageDescription">{lang === 'PL' ? data.SecondDescription_langPL : SecondDescription_langEng}</p>
       <h2 className="pageTitle">
-        <span>{lang === 'PL' ? 'Nasi Instruktorzy' : 'Our Instructors'}</span>
+        <span>{lang === 'PL' ? data.SecondTitle_langPL : data.SecondTitle_langEng}</span>
       </h2>
+
+      {data.ImageWithText?.map((item) => (
+        <ImageWithText key={item.id} item={item} lang={lang} />
+      ))}
     </Layout>
   );
 };
 
 const query = graphql`
   query {
-    strapiAboutUs {
+    strapiRecreation {
+      Title_langEng
+      Title_langPL
       Description_langEng
       Description_langPL
+      FullWidthImage {
+        childImageSharp {
+          fluid(maxWidth: 1240) {
+            ...GatsbyImageSharpFluid_noBase64
+          }
+        }
+      }
+      SecondDescription_langEng
+      SecondDescription_langPL
+      SecondTitle_langEng
+      SecondTitle_langPL
+      ImageWithText {
+        Description_langEng
+        Description_langPL
+        Variant
+        id
+        Image {
+          childImageSharp {
+            fluid(maxWidth: 600) {
+              ...GatsbyImageSharpFluid_noBase64
+            }
+          }
+        }
+      }
     }
   }
 `;
