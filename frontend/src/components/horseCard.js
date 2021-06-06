@@ -6,7 +6,7 @@ import { horsePrices } from '../utils/prices';
 
 import '../styles/components/card.scss';
 
-const Card = ({ lang, horse }) => {
+const HorseCard = ({ lang, horse }) => {
   return (
     <div className={`card${horse.isSold ? ' isSold' : ''}`}>
       <div className="card-image">
@@ -64,4 +64,4 @@ const Card = ({ lang, horse }) => {
   );
 };
 
-export default Card;
+export default HorseCard;

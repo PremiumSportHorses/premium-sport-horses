@@ -7,24 +7,19 @@ import { getHorseGenderLabel, getLangPath } from '../utils/lang';
 import { horsePrices } from '../utils/prices';
 
 import '../styles/components/horseDetails.scss';
-import { useWindowSize } from '../utils/windowSizeHook';
-import { getSrollBarWidth } from '../utils/scrollbar';
 
 export const query = graphql`
-  query HorseQuery($slug: String!) {
-    strapiHorse(name: { eq: $slug }) {
-      isSold
+  query BreedingHorseQuery($slug: String!) {
+    strapiBreedingHorse(name: { eq: $slug }) {
       name
       description_langPL
       description_langEng
       description_langPL
       age
-      price
       breed_langPL
       breed_langEng
       height
       gender
-      level
       image: mainImage {
         publicURL
         childImageSharp {
@@ -33,8 +28,7 @@ export const query = graphql`
           }
         }
       }
-      youtubeLink
-      Pedigree {
+      pedigree {
         MothersMothersMother
         father
         mother
@@ -54,45 +48,14 @@ export const query = graphql`
   }
 `;
 
-const getYoutubeEmbedLink = (link) => {
-  if (!link || link === 'NA') {
-    return null;
-  }
-
-  const items = link.split('/');
-  return items && `https://www.youtube.com/embed/${items[items.length - 1]}`;
-};
-
-const maxVideoWidth = 860;
-
-const getVideoSize = (windowSize) => {
-  let width = maxVideoWidth;
-  const scrollBarWidth = getSrollBarWidth();
-
-  if (windowSize.width && windowSize.width < 768) {
-    width = windowSize.width - 30 - scrollBarWidth;
-  } else if (windowSize.width && windowSize.width < 925) {
-    width = windowSize.width - 50 - scrollBarWidth;
-  }
-
-  return { width, height: width * 0.6 };
-};
-
-const Horse = ({ data, pageContext, path }) => {
+const BreedingHorse = ({ data, pageContext, path }) => {
   const { lang } = pageContext;
-  const horse = data.strapiHorse;
-  const youtube = getYoutubeEmbedLink(horse.youtubeLink);
-
-  const windowSize = useWindowSize();
-  const videoSize = getVideoSize(windowSize);
+  const horse = data.strapiBreedingHorse;
 
   return (
     <Layout lang={lang} path={path}>
       <h1 className="pageTitle">
-        <span>
-          {horse.name}
-          {horse.isSold ? (lang === 'PL' ? ' (Sprzedany)' : ' (Sold)') : ''}
-        </span>
+        <span>{horse.name}</span>
       </h1>
       <div className="pageDescription">
         <Markdown source={horse[`description_lang${lang}`]} escapeHtml={false} />
@@ -203,26 +166,17 @@ const Horse = ({ data, pageContext, path }) => {
           </div>
         </div>
       )}
-      {youtube && (
-        <div className="video">
-          <iframe
-            title="main video"
-            id="ytplayer"
-            type="text/html"
-            width={videoSize.width}
-            height={videoSize.height}
-            src={youtube}
-            frameBorder="0"
-          ></iframe>
-        </div>
-      )}
+
       <div className="action-items">
         <Link to={getLangPath(`/horses`, lang)} className="btn-tertiary">
-          {lang === 'PL' ? 'Zobacz wszystkie konie' : 'See all horses'}
+          {lang === 'PL' ? 'Zobacz wszystkie konie na sprzedaz' : 'See all horses for sale'}
+        </Link>
+        <Link to={getLangPath(`/breeding`, lang)} className="btn-tertiary">
+          {lang === 'PL' ? 'Zobacz wszystkie konie hodowlane' : 'See all breeding horses'}
         </Link>
       </div>
     </Layout>
   );
 };
 
-export default Horse;
+export default BreedingHorse;
