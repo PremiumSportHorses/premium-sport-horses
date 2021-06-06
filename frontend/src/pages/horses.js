@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { navigate } from '@reach/router';
 import Layout from '../components/layout';
-import HorseCard from '../components/horseCard';
+import HorseCard from '../components/horseCards/horseCard';
 import FilterItem from '../components/filterItem';
 import Checkbox from '../components/checkbox';
 

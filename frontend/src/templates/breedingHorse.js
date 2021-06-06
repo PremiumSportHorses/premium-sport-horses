@@ -4,7 +4,7 @@ import Markdown from 'react-markdown';
 import Img from 'gatsby-image';
 import Layout from '../components/layout';
 import { getHorseGenderLabel, getLangPath } from '../utils/lang';
-import { horsePrices } from '../utils/prices';
+import OffspringCard from '../components/horseCards/offspringCard';
 
 import '../styles/components/horseDetails.scss';
 
@@ -14,7 +14,6 @@ export const query = graphql`
       name
       description_langPL
       description_langEng
-      description_langPL
       age
       breed_langPL
       breed_langEng
@@ -43,6 +42,24 @@ export const query = graphql`
         mothersFathersMother
         mothersMother
         mothersMothersFather
+      }
+      offspring {
+        age
+        breed_langEng
+        breed_langPL
+        father
+        gender
+        name
+        description_langPL
+        description_langEng
+        mainImage: image {
+          publicURL
+          childImageSharp {
+            fluid(maxWidth: 700) {
+              ...GatsbyImageSharpFluid_noBase64
+            }
+          }
+        }
       }
     }
   }
@@ -89,22 +106,10 @@ const BreedingHorse = ({ data, pageContext, path }) => {
               <span className="value">{getHorseGenderLabel(horse.gender, lang)}</span>
             </div>
           </div>
-          <div className="table-row">
-            <div className="table-cell">
-              <span className="label">{lang === 'PL' ? 'Poziom' : 'Level'}: </span>
-              <span className="value">{horse.level}</span>
-            </div>
-          </div>
-          <div className="table-row">
-            <div className="table-cell">
-              <span className="label">{lang === 'PL' ? 'Cena' : 'Price'}: </span>
-              <span className="value">{horsePrices[horse.price]}</span>
-            </div>
-          </div>
         </div>
       </div>
 
-      {horse.Pedigree && (
+      {horse.pedigree && (
         <div className="pedigree-wrapper">
           <h3 className="sectionTitle">{lang === 'PL' ? 'Rodowód' : 'Pedigree'}</h3>
           <div className="pedigree">
@@ -116,50 +121,50 @@ const BreedingHorse = ({ data, pageContext, path }) => {
               </div>
               <div className="table-col">
                 <div className="table-cell">
-                  <span className="label">{horse.Pedigree.father}</span>
+                  <span className="label">{horse.pedigree?.father}</span>
                 </div>
                 <div className="table-cell">
-                  <span className="label">{horse.Pedigree.mother}</span>
-                </div>
-              </div>
-              <div className="table-col">
-                <div className="table-cell">
-                  <span className="label">{horse.Pedigree.fathersFather}</span>
-                </div>
-                <div className="table-cell">
-                  <span className="label">{horse.Pedigree.fathersMother}</span>
-                </div>
-                <div className="table-cell">
-                  <span className="label">{horse.Pedigree.mothersFather}</span>
-                </div>
-                <div className="table-cell">
-                  <span className="label">{horse.Pedigree.mothersMother}</span>
+                  <span className="label">{horse.pedigree?.mother}</span>
                 </div>
               </div>
               <div className="table-col">
                 <div className="table-cell">
-                  <span className="label">{horse.Pedigree.fathersFathersFather}</span>
+                  <span className="label">{horse.pedigree?.fathersFather}</span>
                 </div>
                 <div className="table-cell">
-                  <span className="label">{horse.Pedigree.fathersFathersMother}</span>
+                  <span className="label">{horse.pedigree?.fathersMother}</span>
                 </div>
                 <div className="table-cell">
-                  <span className="label">{horse.Pedigree.fathersMothersFather}</span>
+                  <span className="label">{horse.pedigree?.mothersFather}</span>
                 </div>
                 <div className="table-cell">
-                  <span className="label">{horse.Pedigree.fathersMothersMother}</span>
+                  <span className="label">{horse.pedigree?.mothersMother}</span>
+                </div>
+              </div>
+              <div className="table-col">
+                <div className="table-cell">
+                  <span className="label">{horse.pedigree?.fathersFathersFather}</span>
                 </div>
                 <div className="table-cell">
-                  <span className="label">{horse.Pedigree.mothersFathersFather}</span>
+                  <span className="label">{horse.pedigree?.fathersFathersMother}</span>
                 </div>
                 <div className="table-cell">
-                  <span className="label">{horse.Pedigree.mothersFathersMother}</span>
+                  <span className="label">{horse.pedigree?.fathersMothersFather}</span>
                 </div>
                 <div className="table-cell">
-                  <span className="label">{horse.Pedigree.mothersMothersFather}</span>
+                  <span className="label">{horse.pedigree?.fathersMothersMother}</span>
                 </div>
                 <div className="table-cell">
-                  <span className="label">{horse.Pedigree.MothersMothersMother}</span>
+                  <span className="label">{horse.pedigree?.mothersFathersFather}</span>
+                </div>
+                <div className="table-cell">
+                  <span className="label">{horse.pedigree?.mothersFathersMother}</span>
+                </div>
+                <div className="table-cell">
+                  <span className="label">{horse.pedigree?.mothersMothersFather}</span>
+                </div>
+                <div className="table-cell">
+                  <span className="label">{horse.pedigree?.MothersMothersMother}</span>
                 </div>
               </div>
             </div>
@@ -167,12 +172,21 @@ const BreedingHorse = ({ data, pageContext, path }) => {
         </div>
       )}
 
+      <h2 className="pageTitle with-margin-bottom">
+        <span>{lang === 'PL' ? 'Potomstwo' : 'Offspring'}</span>
+      </h2>
+
+      <div className="cardsList">
+        {horse.offspring &&
+          horse.offspring.map((offspring) => <OffspringCard lang={lang} horse={offspring} key={offspring.name} />)}
+      </div>
+
       <div className="action-items">
-        <Link to={getLangPath(`/horses`, lang)} className="btn-tertiary">
-          {lang === 'PL' ? 'Zobacz wszystkie konie na sprzedaz' : 'See all horses for sale'}
-        </Link>
         <Link to={getLangPath(`/breeding`, lang)} className="btn-tertiary">
           {lang === 'PL' ? 'Zobacz wszystkie konie hodowlane' : 'See all breeding horses'}
+        </Link>
+        <Link to={getLangPath(`/horses`, lang)} className="btn-tertiary">
+          {lang === 'PL' ? 'Zobacz konie na sprzedaz' : 'See horses for sale'}
         </Link>
       </div>
     </Layout>

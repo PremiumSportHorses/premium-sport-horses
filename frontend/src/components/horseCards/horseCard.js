@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import Img from 'gatsby-image';
-import { getLangPath, getHorseGenderLabel } from '../utils/lang';
-import { horsePrices } from '../utils/prices';
+import { getLangPath, getHorseGenderLabel } from '../../utils/lang';
+import { horsePrices } from '../../utils/prices';
 
-import '../styles/components/card.scss';
+import '../../styles/components/card.scss';
 
 const HorseCard = ({ lang, horse }) => {
   return (

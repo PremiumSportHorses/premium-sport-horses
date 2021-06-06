@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import Img from 'gatsby-image';
-import { getLangPath } from '../utils/lang';
+import { getLangPath } from '../../utils/lang';
 
-import '../styles/components/card.scss';
+import '../../styles/components/card.scss';
 
 const BreedingHorseCard = ({ lang, horse }) => {
   return (
