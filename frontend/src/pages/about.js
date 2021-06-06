@@ -1,4 +1,5 @@
 import React from 'react';
+import Markdown from 'react-markdown';
 import { graphql, useStaticQuery } from 'gatsby';
 import Img from 'gatsby-image';
 
@@ -15,17 +16,23 @@ const AboutPage = (props) => {
       <h1 className="pageTitle">
         <span>{data[`Title_lang${lang}`]}</span>
       </h1>
-      <p className="pageDescription">{data[`Description_lang${lang}`]}</p>
+      <div className=" pageDescription">
+        <Markdown source={data[`Description_lang${lang}`]} escapeHtml={false} />
+      </div>
       {data.Image && (
         <div className="pageImage">
           <Img fluid={data.Image.childImageSharp.fluid} />
         </div>
       )}
-      <p className="pageDescription">{data[`Paragraph2_lang${lang}`]}</p>
+      <div className=" pageDescription">
+        <Markdown source={data[`Paragraph2_lang${lang}`]} escapeHtml={false} />
+      </div>
       <h2 className="pageTitle">
         <span>{data[`Title2_lang${lang}`]}</span>
       </h2>
-      <p className="pageDescription">{data[`Paragraph3_lang${lang}`]}</p>
+      <div className=" pageDescription">
+        <Markdown source={data[`Paragraph3_lang${lang}`]} escapeHtml={false} />
+      </div>
       {data.ImageWithText?.map((item) => (
         <ImageWithText key={item.id} item={item} lang={lang} />
       ))}

@@ -4,27 +4,23 @@ import Markdown from 'react-markdown';
 import Img from 'gatsby-image';
 import Layout from '../components/layout';
 import { getHorseGenderLabel, getLangPath } from '../utils/lang';
-import { horsePrices } from '../utils/prices';
+import OffspringCard from '../components/horseCards/offspringCard';
 
 import '../styles/components/horseDetails.scss';
-import { useWindowSize } from '../utils/windowSizeHook';
-import { getSrollBarWidth } from '../utils/scrollbar';
 
 export const query = graphql`
-  query HorseQuery($slug: String!) {
-    strapiHorse(name: { eq: $slug }) {
-      isSold
+  query BreedingHorseQuery($slug: String!) {
+    strapiBreedingHorse(name: { eq: $slug }) {
       name
       description_langPL
       description_langEng
-      description_langPL
       age
-      price
       breed_langPL
       breed_langEng
+      coat_langEng
+      coat_langPL
       height
       gender
-      level
       image: mainImage {
         publicURL
         childImageSharp {
@@ -33,8 +29,7 @@ export const query = graphql`
           }
         }
       }
-      youtubeLink
-      Pedigree {
+      pedigree {
         MothersMothersMother
         father
         mother
@@ -50,49 +45,36 @@ export const query = graphql`
         mothersMother
         mothersMothersFather
       }
+      offspring {
+        age
+        breed_langEng
+        breed_langPL
+        father
+        gender
+        name
+        description_langPL
+        description_langEng
+        mainImage: image {
+          publicURL
+          childImageSharp {
+            fluid(maxWidth: 700) {
+              ...GatsbyImageSharpFluid_noBase64
+            }
+          }
+        }
+      }
     }
   }
 `;
 
-const getYoutubeEmbedLink = (link) => {
-  if (!link || link === 'NA') {
-    return null;
-  }
-
-  const items = link.split('/');
-  return items && `https://www.youtube.com/embed/${items[items.length - 1]}`;
-};
-
-const maxVideoWidth = 860;
-
-const getVideoSize = (windowSize) => {
-  let width = maxVideoWidth;
-  const scrollBarWidth = getSrollBarWidth();
-
-  if (windowSize.width && windowSize.width < 768) {
-    width = windowSize.width - 30 - scrollBarWidth;
-  } else if (windowSize.width && windowSize.width < 925) {
-    width = windowSize.width - 50 - scrollBarWidth;
-  }
-
-  return { width, height: width * 0.6 };
-};
-
-const Horse = ({ data, pageContext, path }) => {
+const BreedingHorse = ({ data, pageContext, path }) => {
   const { lang } = pageContext;
-  const horse = data.strapiHorse;
-  const youtube = getYoutubeEmbedLink(horse.youtubeLink);
-
-  const windowSize = useWindowSize();
-  const videoSize = getVideoSize(windowSize);
+  const horse = data.strapiBreedingHorse;
 
   return (
     <Layout lang={lang} path={path}>
       <h1 className="pageTitle">
-        <span>
-          {horse.name}
-          {horse.isSold ? (lang === 'PL' ? ' (Sprzedany)' : ' (Sold)') : ''}
-        </span>
+        <span>{horse.name}</span>
       </h1>
       <div className="pageDescription">
         <Markdown source={horse[`description_lang${lang}`]} escapeHtml={false} />
@@ -122,26 +104,20 @@ const Horse = ({ data, pageContext, path }) => {
           </div>
           <div className="table-row">
             <div className="table-cell">
+              <span className="label">{lang === 'PL' ? 'Maść' : 'Coat'}: </span>
+              <span className="value">{lang === 'PL' ? horse.coat_langPL : horse.coat_langEng} </span>
+            </div>
+          </div>
+          <div className="table-row">
+            <div className="table-cell">
               <span className="label">{lang === 'PL' ? 'Płeć' : 'Gender'}: </span>
               <span className="value">{getHorseGenderLabel(horse.gender, lang)}</span>
-            </div>
-          </div>
-          <div className="table-row">
-            <div className="table-cell">
-              <span className="label">{lang === 'PL' ? 'Poziom' : 'Level'}: </span>
-              <span className="value">{horse.level}</span>
-            </div>
-          </div>
-          <div className="table-row">
-            <div className="table-cell">
-              <span className="label">{lang === 'PL' ? 'Cena' : 'Price'}: </span>
-              <span className="value">{horsePrices[horse.price]}</span>
             </div>
           </div>
         </div>
       </div>
 
-      {horse.Pedigree && (
+      {horse.pedigree && (
         <div className="pedigree-wrapper">
           <h3 className="sectionTitle">{lang === 'PL' ? 'Rodowód' : 'Pedigree'}</h3>
           <div className="pedigree">
@@ -153,76 +129,76 @@ const Horse = ({ data, pageContext, path }) => {
               </div>
               <div className="table-col">
                 <div className="table-cell">
-                  <span className="label">{horse.Pedigree.father}</span>
+                  <span className="label">{horse.pedigree?.father}</span>
                 </div>
                 <div className="table-cell">
-                  <span className="label">{horse.Pedigree.mother}</span>
-                </div>
-              </div>
-              <div className="table-col">
-                <div className="table-cell">
-                  <span className="label">{horse.Pedigree.fathersFather}</span>
-                </div>
-                <div className="table-cell">
-                  <span className="label">{horse.Pedigree.fathersMother}</span>
-                </div>
-                <div className="table-cell">
-                  <span className="label">{horse.Pedigree.mothersFather}</span>
-                </div>
-                <div className="table-cell">
-                  <span className="label">{horse.Pedigree.mothersMother}</span>
+                  <span className="label">{horse.pedigree?.mother}</span>
                 </div>
               </div>
               <div className="table-col">
                 <div className="table-cell">
-                  <span className="label">{horse.Pedigree.fathersFathersFather}</span>
+                  <span className="label">{horse.pedigree?.fathersFather}</span>
                 </div>
                 <div className="table-cell">
-                  <span className="label">{horse.Pedigree.fathersFathersMother}</span>
+                  <span className="label">{horse.pedigree?.fathersMother}</span>
                 </div>
                 <div className="table-cell">
-                  <span className="label">{horse.Pedigree.fathersMothersFather}</span>
+                  <span className="label">{horse.pedigree?.mothersFather}</span>
                 </div>
                 <div className="table-cell">
-                  <span className="label">{horse.Pedigree.fathersMothersMother}</span>
+                  <span className="label">{horse.pedigree?.mothersMother}</span>
+                </div>
+              </div>
+              <div className="table-col">
+                <div className="table-cell">
+                  <span className="label">{horse.pedigree?.fathersFathersFather}</span>
                 </div>
                 <div className="table-cell">
-                  <span className="label">{horse.Pedigree.mothersFathersFather}</span>
+                  <span className="label">{horse.pedigree?.fathersFathersMother}</span>
                 </div>
                 <div className="table-cell">
-                  <span className="label">{horse.Pedigree.mothersFathersMother}</span>
+                  <span className="label">{horse.pedigree?.fathersMothersFather}</span>
                 </div>
                 <div className="table-cell">
-                  <span className="label">{horse.Pedigree.mothersMothersFather}</span>
+                  <span className="label">{horse.pedigree?.fathersMothersMother}</span>
                 </div>
                 <div className="table-cell">
-                  <span className="label">{horse.Pedigree.MothersMothersMother}</span>
+                  <span className="label">{horse.pedigree?.mothersFathersFather}</span>
+                </div>
+                <div className="table-cell">
+                  <span className="label">{horse.pedigree?.mothersFathersMother}</span>
+                </div>
+                <div className="table-cell">
+                  <span className="label">{horse.pedigree?.mothersMothersFather}</span>
+                </div>
+                <div className="table-cell">
+                  <span className="label">{horse.pedigree?.MothersMothersMother}</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
       )}
-      {youtube && (
-        <div className="video">
-          <iframe
-            title="main video"
-            id="ytplayer"
-            type="text/html"
-            width={videoSize.width}
-            height={videoSize.height}
-            src={youtube}
-            frameBorder="0"
-          ></iframe>
-        </div>
-      )}
+
+      <h2 className="pageTitle with-margin-bottom">
+        <span>{lang === 'PL' ? 'Potomstwo' : 'Offspring'}</span>
+      </h2>
+
+      <div className="cardsList">
+        {horse.offspring &&
+          horse.offspring.map((offspring) => <OffspringCard lang={lang} horse={offspring} key={offspring.name} />)}
+      </div>
+
       <div className="action-items">
+        <Link to={getLangPath(`/breeding`, lang)} className="btn-tertiary">
+          {lang === 'PL' ? 'Zobacz wszystkie konie hodowlane' : 'See all breeding horses'}
+        </Link>
         <Link to={getLangPath(`/horses`, lang)} className="btn-tertiary">
-          {lang === 'PL' ? 'Zobacz wszystkie konie' : 'See all horses'}
+          {lang === 'PL' ? 'Zobacz konie na sprzedaz' : 'See horses for sale'}
         </Link>
       </div>
     </Layout>
   );
 };
 
-export default Horse;
+export default BreedingHorse;

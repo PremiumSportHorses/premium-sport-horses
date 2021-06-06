@@ -1,9 +1,41 @@
+const createLangPages = (items, template, path, createPage) => {
+  items.forEach((item) => {
+    createPage({
+      path: `pl/${path}/${item.node.slug}`,
+      component: template,
+      context: {
+        slug: item.node.slug,
+        lang: 'PL',
+      },
+    });
+  });
+
+  items.forEach((item) => {
+    createPage({
+      path: `${path}/${item.node.slug}`,
+      component: template,
+      context: {
+        slug: item.node.slug,
+        lang: 'Eng',
+      },
+    });
+  });
+};
+
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
   const result = await graphql(
     `
       {
         horses: allStrapiHorse(filter: { isHidden: { eq: false } }) {
+          edges {
+            node {
+              strapiId
+              slug: name
+            }
+          }
+        }
+        breedingHorses: allStrapiBreedingHorse(filter: { isHidden: { eq: false } }) {
           edges {
             node {
               strapiId
@@ -22,28 +54,12 @@ exports.createPages = async ({ graphql, actions }) => {
   // Create horses pages.
   const horses = result.data.horses.edges;
   const HorseTemplate = require.resolve('./src/templates/horse.js');
+  createLangPages(horses, HorseTemplate, 'horse', createPage);
 
-  horses.forEach((horse) => {
-    createPage({
-      path: `pl/horse/${horse.node.slug}`,
-      component: HorseTemplate,
-      context: {
-        slug: horse.node.slug,
-        lang: 'PL',
-      },
-    });
-  });
-
-  horses.forEach((horse) => {
-    createPage({
-      path: `horse/${horse.node.slug}`,
-      component: HorseTemplate,
-      context: {
-        slug: horse.node.slug,
-        lang: 'Eng',
-      },
-    });
-  });
+  // Create breeding horses pages.
+  const breedingHorses = result.data.breedingHorses.edges;
+  const BreedingHorseTemplate = require.resolve('./src/templates/breedingHorse.js');
+  createLangPages(breedingHorses, BreedingHorseTemplate, 'breeding', createPage);
 };
 
 module.exports.onCreateNode = async ({ node, actions, createNodeId }) => {

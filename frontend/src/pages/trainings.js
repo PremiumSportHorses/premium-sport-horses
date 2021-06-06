@@ -11,7 +11,7 @@ const TrainingsPage = (props) => {
   return (
     <Layout lang={lang} path={path}>
       {data.Section?.map((section) => (
-        <TitleParImagePar item={section} lang={lang} />
+        <TitleParImagePar item={section} lang={lang} key={section.id} />
       ))}
     </Layout>
   );
@@ -21,6 +21,7 @@ const query = graphql`
   query {
     strapiTrainings {
       Section {
+        id
         Paragraph1_langEng
         Paragraph1_langPL
         Paragraph2_langEng

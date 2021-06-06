@@ -51,7 +51,7 @@
   background-color: transparent;
   border: 1px solid $darkBlue;
   border-radius: 3px;
-  
+
   @include defaultHover;
 }
 
@@ -77,16 +77,12 @@
   margin-top: 20px;
   margin-bottom: 20px;
   font-style: normal;
-  
+
   span {
     display: block;
   }
 
   a {
     text-decoration: none;
-
-    // &:hover {
-    //  font-weight: bold;
-    // }
   }
 }

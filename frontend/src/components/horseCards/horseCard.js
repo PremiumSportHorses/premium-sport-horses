@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import Img from 'gatsby-image';
-import { getLangPath, getHorseGenderLabel } from '../utils/lang';
-import { horsePrices } from '../utils/prices';
+import { getLangPath, getHorseGenderLabel } from '../../utils/lang';
+import { horsePrices } from '../../utils/prices';
 
-import '../styles/components/card.scss';
+import '../../styles/components/card.scss';
 
-const Card = ({ lang, horse }) => {
+const HorseCard = ({ lang, horse }) => {
   return (
     <div className={`card${horse.isSold ? ' isSold' : ''}`}>
       <div className="card-image">
@@ -64,4 +64,4 @@ const Card = ({ lang, horse }) => {
   );
 };
 
-export default Card;
+export default HorseCard;
